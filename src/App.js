@@ -85,7 +85,7 @@ export default class App extends Component {
             <Switch>
               <Route
                 exact
-                path='/'
+                path='/weather-app'
                 render={props => (
                   <Fragment>
                     <Search
@@ -105,7 +105,7 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path='/forecast/:name'
+                path='/weather-app/forecast/:name'
                 render={props => (
                   <Forecast
                     {...props}
@@ -115,7 +115,7 @@ export default class App extends Component {
                   />
                 )}
               />
-              <Route exact path='/about' component={About} />
+              <Route exact path='/weather-app/about' component={About} />
             </Switch>
           </div>
         </div>
