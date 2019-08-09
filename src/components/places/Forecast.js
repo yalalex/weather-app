@@ -19,16 +19,15 @@ export default class Forecast extends Component {
   };
 
   render() {
-    const { current, forecastToday, forecast16, loading } = this.props;
-    const { name, sky, wind, temp, pressure, humidity, icon } = current,
+    const { current, forecastToday, forecast16, loading } = this.props,
+      { name, sky, wind, temp, pressure, humidity, icon } = current,
       time = new Date().toLocaleTimeString(navigator.language, {
         hour: '2-digit',
         minute: '2-digit'
-      });
-    // if (forecastToday.length === 0) return null;
-    // else
-    const { btn, target } = this.state;
-    if (loading) {
+      }),
+      { btn, target } = this.state;
+    if (forecastToday.length === 0) return null;
+    else if (loading) {
       return <Spinner />;
     } else
       return (
