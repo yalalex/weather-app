@@ -37,7 +37,7 @@ export default class PlaceItem extends Component {
           wind: res.body.wind.speed,
           pressure: res.body.main.pressure,
           humidity: res.body.main.humidity,
-          sky: res.body.weather[0].main,
+          sky: res.body.weather[0].description,
           icon: res.body.weather[0].icon
         });
       })
@@ -60,7 +60,7 @@ export default class PlaceItem extends Component {
         <h4>{place.country}</h4>
         <div>
           <Link
-            to={`/weather-app/forecast/${place.name}`}
+            to={`/weather-app/current/${this.state.name}`}
             className='btn btn-dark btn-sm my-1'
             onClick={() =>
               getForecast(place.latitude, place.longitude, this.state)

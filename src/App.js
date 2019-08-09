@@ -17,7 +17,8 @@ export default class App extends Component {
     alert: null,
     places: [],
     current: {},
-    forecast: []
+    forecastToday: [],
+    forecast16: []
   };
 
   //Search places to get weather for
@@ -52,6 +53,25 @@ export default class App extends Component {
   //Get current weather details and 16-day forecast
   getForecast = async (lat, lon, current) => {
     this.setState({ loading: true });
+    request
+      .get('https://community-open-weather-map.p.rapidapi.com/forecast')
+      .query({ lat: lat })
+      .query({ lon: lon })
+      .query({ units: this.state.units })
+      .set('x-rapidapi-host', 'community-open-weather-map.p.rapidapi.com')
+      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
+      .set('Accept', 'application/json')
+      .then(resp => {
+        const today = resp.body.list.slice(0, 9);
+        this.setState({
+          forecastToday: today,
+          current: current,
+          loading: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     const un = this.state.units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&units=${un}&key=${
@@ -59,11 +79,9 @@ export default class App extends Component {
       }`
     );
     this.setState({
-      forecast: res.data.data,
-      current: current,
-      loading: false
+      forecast16: res.data.data
     });
-    console.log(this.state.forecast);
+    console.log(this.state.forecastToday);
   };
 
   //Switch C<->F
@@ -74,8 +92,16 @@ export default class App extends Component {
   };
 
   render() {
-    const { places, loading, alert, units, current, forecast } = this.state;
-    console.log(this.state.forecast);
+    const {
+      places,
+      loading,
+      alert,
+      units,
+      current,
+      forecastToday,
+      forecast16
+    } = this.state;
+    // console.log(this.state.forecastToday);
     return (
       <Router>
         <div className='App'>
@@ -105,12 +131,12 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path='/weather-app/forecast/:name'
+                path='/weather-app/current/:name'
                 render={props => (
                   <Forecast
-                    {...props}
                     current={current}
-                    forecast={forecast}
+                    forecastToday={forecastToday}
+                    forecast16={forecast16}
                     loading={loading}
                   />
                 )}

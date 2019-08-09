@@ -9,6 +9,7 @@ export default class Search extends Component {
   static propTypes = {
     searchPlaces: PropTypes.func.isRequired,
     clearSearch: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired
   };
 
