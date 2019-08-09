@@ -85,8 +85,8 @@ export default class App extends Component {
   };
 
   //Switch C<->F
-  switchUnits = units => {
-    units === 'I'
+  switchUnits = () => {
+    this.state.units === 'metric'
       ? this.setState({ units: 'imperial' })
       : this.setState({ units: 'metric' });
   };
@@ -105,7 +105,7 @@ export default class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <Navbar />
+          <Navbar switchUnits={this.switchUnits} units={units} />
           <div className='container'>
             <Alert alert={alert} />
             <Switch>
