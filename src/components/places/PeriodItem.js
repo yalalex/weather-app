@@ -11,12 +11,21 @@ const PeriodItem = ({ period }) => {
     <div className='card text-center'>
       <ul>
         <li>
-          <strong>{time}</strong>
+          <h3>{time}</h3>
         </li>
         <li>
-          <img alt={weather[0].description} src={weather[0].icon} />
+          <strong>{main.temp.toFixed()}°</strong>
         </li>
-        <li>{main.temp.toFixed()}°</li>
+        <li>
+          <strong>{weather[0].main}</strong>
+        </li>
+        <li>
+          <img
+            alt={weather[0].description}
+            src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+            width='100'
+          />
+        </li>
         {/* <li>Precipitation: {rain}%</li> */}
         <li>Humidity: {main.humidity}%</li>
         <li>Wind: {wind.speed.toFixed(1)} m/s</li>

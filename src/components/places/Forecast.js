@@ -20,7 +20,7 @@ export default class Forecast extends Component {
 
   render() {
     const { current, forecastToday, forecast16, loading } = this.props,
-      { name, sky, wind, temp, pressure, humidity, icon } = current,
+      { name, weather, sky, wind, temp, pressure, humidity, icon } = current,
       time = new Date().toLocaleTimeString(navigator.language, {
         hour: '2-digit',
         minute: '2-digit'
@@ -34,9 +34,13 @@ export default class Forecast extends Component {
         <Router>
           <Fragment>
             <div className='card grid-2'>
-              <div className='card grid-2'>
-                <div>
-                  <img alt={sky} src={icon} />
+              <div className='card grid-2' style={{ padding: '0' }}>
+                <div className='text-center'>
+                  <img
+                    alt={sky}
+                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    width='150'
+                  />
                 </div>
                 <div>
                   <h1>{temp}°</h1>
@@ -46,7 +50,9 @@ export default class Forecast extends Component {
               </div>
               <div style={{ padding: '0.7rem 0' }}>
                 <ul>
-                  <li>{sky}</li>
+                  <li>
+                    <strong>{weather}</strong>
+                  </li>
                   <li>Humidity: {humidity}%</li>
                   <li>Wind: {wind.toFixed(1)} m/s</li>
                   <li>Pressure: {pressure.toFixed()} mbar</li>

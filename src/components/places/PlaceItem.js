@@ -37,6 +37,7 @@ export default class PlaceItem extends Component {
           wind: res.body.wind.speed,
           pressure: res.body.main.pressure,
           humidity: res.body.main.humidity,
+          weather: res.body.weather[0].main,
           sky: res.body.weather[0].description,
           icon: res.body.weather[0].icon
         });
@@ -53,7 +54,11 @@ export default class PlaceItem extends Component {
     return (
       <div className='card text-center'>
         <h1>{temp}°</h1>
-        <img alt={sky} src={icon} />
+        <img
+          alt={sky}
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          width='100'
+        />
         <h3>
           {place.city}, {place.regionCode}
         </h3>

@@ -21,13 +21,21 @@ const DayItem = ({ day }) => {
     <div className='card text-center'>
       <ul>
         <li>
-          <strong>{date}</strong>
+          <h3>{date}</h3>
         </li>
         <li>
-          <img alt={weather.description} src={weather.icon} />
+          <img
+            alt={weather.description}
+            src={`https://www.weatherbit.io/static/img/icons/${
+              weather.icon
+            }.png`}
+            width='70'
+          />
         </li>
         <li>
-          {max_temp.toFixed()}°/{min_temp.toFixed()}°
+          <h3>
+            {max_temp.toFixed()}°/{min_temp.toFixed()}°
+          </h3>
         </li>
         <li>Precipitation: {pop}%</li>
         <li>Humidity: {rh}%</li>
