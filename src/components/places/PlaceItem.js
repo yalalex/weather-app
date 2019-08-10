@@ -6,6 +6,7 @@ import request from 'superagent';
 export default class PlaceItem extends Component {
   state = {
     name: '',
+    weather: '',
     sky: '',
     wind: '',
     temp: '',
