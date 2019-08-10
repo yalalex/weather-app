@@ -34,15 +34,15 @@ export default class Forecast extends Component {
         <Router>
           <Fragment>
             <div className='card grid-2'>
-              <div className='card grid-2' style={{ padding: '0' }}>
-                <div className='text-center'>
+              <div className='card grid-2 all-center' style={{ padding: '0' }}>
+                <div>
                   <img
                     alt={sky}
                     src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
                     width='150'
                   />
                 </div>
-                <div>
+                <div className='text-left'>
                   <h1>{temp}°</h1>
                   <h2>{name}</h2>
                   <h3>{time}</h3>
@@ -51,7 +51,7 @@ export default class Forecast extends Component {
               <div style={{ padding: '0.7rem 0' }}>
                 <ul>
                   <li>
-                    <strong>{weather}</strong>
+                    <h3>{weather}</h3>
                   </li>
                   <li>Humidity: {humidity}%</li>
                   <li>Wind: {wind.toFixed(1)} m/s</li>

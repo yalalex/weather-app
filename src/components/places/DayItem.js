@@ -13,8 +13,8 @@ const DayItem = ({ day }) => {
       weather
     } = day,
     date = new Date(valid_date).toLocaleDateString(navigator.language, {
-      weekday: 'long',
-      month: 'long',
+      weekday: 'short',
+      month: 'short',
       day: 'numeric'
     });
   return (
