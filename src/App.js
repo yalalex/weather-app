@@ -89,6 +89,7 @@ export default class App extends Component {
     this.state.units === 'metric'
       ? this.setState({ units: 'imperial' })
       : this.setState({ units: 'metric' });
+    this.clearSearch();
   };
 
   render() {
@@ -105,7 +106,11 @@ export default class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <Navbar switchUnits={this.switchUnits} units={units} />
+          <Navbar
+            switchUnits={this.switchUnits}
+            clearSearch={this.clearSearch}
+            units={units}
+          />
           <div className='container'>
             <Alert alert={alert} />
             <Switch>

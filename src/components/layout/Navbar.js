@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ title, units, switchUnits }) => {
+const Navbar = ({ units, switchUnits, clearSearch }) => {
   const un = units === 'metric' ? '°C' : '°F';
   console.log(un);
   return (
     <nav className='navbar bg-primary'>
-      <h1>
-        <i className='fab fa-github' />
-        Weather app
-      </h1>
+      <h1>Weather app</h1>
       <ul>
         <li>
           <Link to='/weather-app'>Home</Link>
@@ -19,7 +16,7 @@ const Navbar = ({ title, units, switchUnits }) => {
           <Link to='/weather-app/about'>About</Link>
         </li>
         <li>
-          <Link to='#' onClick={() => switchUnits()}>
+          <Link to='/weather-app' onClick={switchUnits}>
             {un}
           </Link>
         </li>
