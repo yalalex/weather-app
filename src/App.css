@@ -19,7 +19,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
   color: #333;
 }
 
@@ -110,15 +110,6 @@ ul {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
-}
-
-@media only screen and (max-width: 700px) {
-  .card {
-    padding: 1rem;
-    border: #ccc 1px dotted;
-    margin: 0.7rem 0;
-    text-align: center;
-  }
 }
 
 /* List */
@@ -248,6 +239,11 @@ ul {
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+}
+
+.btn-purple {
+  background: grey;
+  color: #fff;
 }
 
 .btn-primary,
@@ -385,6 +381,13 @@ table th {
 @media (max-width: 700px) {
   .hide-sm {
     display: none;
+  }
+
+  .card {
+    padding: 1rem;
+    border: #ccc 1px dotted;
+    margin: 0.7rem 0;
+    text-align: center;
   }
 
   .grid-2,

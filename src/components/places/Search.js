@@ -16,7 +16,7 @@ export default class Search extends Component {
   onSubmit = e => {
     e.preventDefault();
     if (this.state.text === '') {
-      this.props.setAlert('Please enter something', 'light');
+      this.props.setAlert('Please enter something', 'dark');
     } else {
       this.props.searchPlaces(this.state.text);
       this.setState({ text: '' });
@@ -44,7 +44,7 @@ export default class Search extends Component {
         </form>
         {this.props.showClear && (
           <button
-            className='btn btn-light btn-block'
+            className='btn btn-purple btn-block'
             onClick={this.props.clearSearch}
           >
             Clear
