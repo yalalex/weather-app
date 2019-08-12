@@ -241,6 +241,11 @@ ul {
   color: #333;
 }
 
+.btn-grey {
+  background: #666;
+  color: #fff;
+}
+
 .btn-primary,
 .bg-primary,
 .badge-primary,
