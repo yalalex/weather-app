@@ -33,9 +33,9 @@ const DayItem = ({ day }) => {
           />
         </li>
         <li>
-          <h3>
+          <h2>
             {max_temp.toFixed()}°/{min_temp.toFixed()}°
-          </h3>
+          </h2>
         </li>
         <li>Precipitation: {pop}%</li>
         <li>Humidity: {rh}%</li>

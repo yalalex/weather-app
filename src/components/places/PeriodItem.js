@@ -14,17 +14,14 @@ const PeriodItem = ({ period }) => {
           <h3>{time}</h3>
         </li>
         <li>
-          <strong>{main.temp.toFixed()}°</strong>
-        </li>
-        <li>
-          <strong>{weather[0].main}</strong>
-        </li>
-        <li>
           <img
             alt={weather[0].description}
             src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
             width='100'
           />
+        </li>
+        <li>
+          <h2>{main.temp.toFixed()}°</h2>
         </li>
         {/* <li>Precipitation: {rain}%</li> */}
         <li>Humidity: {main.humidity}%</li>
