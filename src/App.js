@@ -47,7 +47,7 @@ export default class App extends Component {
   //Set alert
   setAlert = (msg, type) => {
     this.setState({ alert: { msg, type } });
-    setTimeout(() => this.setState({ alert: null }), 5000);
+    setTimeout(() => this.setState({ alert: null }), 3000);
   };
 
   //Get current weather details and 16-day forecast
