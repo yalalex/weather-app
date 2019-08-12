@@ -7,7 +7,10 @@ const Navbar = ({ title, units, switchUnits }) => {
   console.log(un);
   return (
     <nav className='navbar bg-primary'>
-      <h1>{title}</h1>
+      <h1>
+        <i className='fab fa-github' />
+        Weather app
+      </h1>
       <ul>
         <li>
           <Link to='/weather-app'>Home</Link>
@@ -23,10 +26,6 @@ const Navbar = ({ title, units, switchUnits }) => {
       </ul>
     </nav>
   );
-};
-
-Navbar.defaultProps = {
-  title: 'Weather app'
 };
 
 Navbar.propTypes = {
