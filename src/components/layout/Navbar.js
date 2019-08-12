@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ units, switchUnits }) => {
-  const un = units === 'metric' ? '°F' : '°C';
-  console.log(un);
+  const switcher = units === 'metric' ? '→°F' : '→°C';
   return (
     <nav className='navbar bg-primary'>
       <h1>Weather app</h1>
@@ -17,7 +16,7 @@ const Navbar = ({ units, switchUnits }) => {
         </li>
         <li>
           <Link to='/weather-app' onClick={switchUnits}>
-            >{un}
+            {switcher}
           </Link>
         </li>
       </ul>
