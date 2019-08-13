@@ -21,7 +21,7 @@ export default class Forecast extends Component {
   render() {
     const { current, forecastToday, forecast16, loading } = this.props,
       { name, weather, sky, wind, temp, pressure, humidity, icon } = current,
-      time = new Date().toLocaleTimeString(navigator.language, {
+      time = new Date().toLocaleTimeString({
         hour: '2-digit',
         minute: '2-digit'
       }),

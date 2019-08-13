@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PeriodItem = ({ period }) => {
   const { dt_txt, main, wind, weather } = period,
-    time = new Date(dt_txt).toLocaleTimeString(navigator.language, {
+    time = new Date(dt_txt).toLocaleTimeString({
       hour: '2-digit',
       minute: '2-digit'
     });
