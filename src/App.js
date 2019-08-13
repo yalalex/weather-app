@@ -53,50 +53,35 @@ export default class App extends Component {
 
   //Get current weather details and 16-day forecast
   getForecast = async (name, lat, lon) => {
+    const { units } = this.state;
     this.setState({ loading: true });
-    request
-      .get('https://community-open-weather-map.p.rapidapi.com/weather')
-      .query({ lat })
-      .query({ lon })
-      .query({ units: this.state.units })
-      .set('x-rapidapi-host', 'community-open-weather-map.p.rapidapi.com')
-      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
-      .set('Accept', 'application/json')
-      .then(respo => {
-        this.setState({
-          current: {
-            name: respo.body.name,
-            temp: respo.body.main.temp.toFixed(),
-            wind: respo.body.wind.speed,
-            pressure: respo.body.main.pressure,
-            humidity: respo.body.main.humidity,
-            weather: respo.body.weather[0].main,
-            sky: respo.body.weather[0].description,
-            icon: respo.body.weather[0].icon
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    request
-      .get('https://community-open-weather-map.p.rapidapi.com/forecast')
-      .query({ lat: lat })
-      .query({ lon: lon })
-      .query({ units: this.state.units })
-      .set('x-rapidapi-host', 'community-open-weather-map.p.rapidapi.com')
-      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
-      .set('Accept', 'application/json')
-      .then(resp => {
-        const today = resp.body.list.slice(0, 9);
-        this.setState({
-          forecastToday: today
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    const un = this.state.units === 'metric' ? 'M' : 'I';
+    const respo = await axios.get(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+        process.env.REACT_APP_OPENWEATHER_KEY
+      }`
+    );
+    this.setState({
+      current: {
+        name: respo.data.name,
+        temp: respo.data.main.temp.toFixed(),
+        wind: respo.data.wind.speed,
+        pressure: respo.data.main.pressure,
+        humidity: respo.data.main.humidity,
+        weather: respo.data.weather[0].main,
+        sky: respo.data.weather[0].description,
+        icon: respo.data.weather[0].icon
+      }
+    });
+    const resp = await axios.get(
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+        process.env.REACT_APP_OPENWEATHER_KEY
+      }`
+    );
+    const today = resp.data.list.slice(0, 9);
+    this.setState({
+      forecastToday: today
+    });
+    const un = units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&units=${un}&key=${
         process.env.REACT_APP_WEATHERBIT_KEY
@@ -129,7 +114,6 @@ export default class App extends Component {
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
-      this.clearSearch();
     } else {
       this.setState({ units: units });
       this.clearSearch();
@@ -146,7 +130,6 @@ export default class App extends Component {
       forecastToday,
       forecast16
     } = this.state;
-    // console.log(this.state.forecastToday);
     return (
       <Router>
         <div className='App'>
@@ -179,12 +162,10 @@ export default class App extends Component {
                 path='/weather-app/current/:name'
                 render={props => (
                   <Forecast
-                    // getForecast={this.getForecast}
                     current={current}
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
-                    // place={place}
                   />
                 )}
               />

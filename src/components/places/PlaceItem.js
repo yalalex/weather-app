@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import request from 'superagent';
+import axios from 'axios';
 
 export default class PlaceItem extends Component {
   state = {
@@ -19,25 +19,20 @@ export default class PlaceItem extends Component {
 
   async componentDidMount() {
     const { place, units } = this.props;
-    request
-      .get('https://community-open-weather-map.p.rapidapi.com/weather')
-      .query({ lat: place.latitude })
-      .query({ lon: place.longitude })
-      .query({ units: units })
-      .set('x-rapidapi-host', 'community-open-weather-map.p.rapidapi.com')
-      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
-      .set('Accept', 'application/json')
-      .then(res => {
-        this.setState({
-          name: res.body.name,
-          temp: res.body.main.temp.toFixed(),
-          sky: res.body.weather[0].description,
-          icon: res.body.weather[0].icon
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const res = await axios.get(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${
+        place.latitude
+      }&lon=${place.longitude}&units=${units}&APPID=${
+        process.env.REACT_APP_OPENWEATHER_KEY
+      }`
+    );
+    this.setState({
+      name: res.data.name,
+      temp: res.data.main.temp.toFixed(),
+      sky: res.data.weather[0].description,
+      icon: res.data.weather[0].icon
+    });
+    console.log(this.state);
   }
 
   render() {
