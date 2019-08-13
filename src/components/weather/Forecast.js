@@ -6,26 +6,22 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 export default class Forecast extends Component {
-  state = {
-    btn: '16-day forecast',
-    target: 'forecast'
-  };
-
   static propTypes = {
     forecastToday: PropTypes.array.isRequired,
     forecast16: PropTypes.array.isRequired,
     current: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    loc: PropTypes.string.isRequired
   };
 
   render() {
-    const { current, forecastToday, forecast16, loading } = this.props,
+    const { current, forecastToday, forecast16, loading, loc } = this.props,
       { name, weather, sky, wind, temp, pressure, humidity, icon } = current,
-      time = new Date().toLocaleTimeString({
+      time = new Date().toLocaleTimeString(loc, {
         hour: '2-digit',
-        minute: '2-digit'
-      }),
-      { btn, target } = this.state;
+        minute: '2-digit',
+        second: undefined
+      });
     if (forecastToday.length === 0) return null;
     else if (loading) {
       return <Spinner />;
@@ -58,7 +54,19 @@ export default class Forecast extends Component {
                   <li>Pressure: {pressure.toFixed()} mbar</li>
                 </ul>
                 <Link
-                  to={`/weather-app/${target}/${name}`}
+                  to={`/weather-app/${name}/current`}
+                  className='btn btn-dark btn-sm my-1'
+                >
+                  24-hr forecast
+                </Link>
+                <Link
+                  to={`/weather-app/${name}/forecast`}
+                  className='btn btn-dark btn-sm my-1'
+                >
+                  16-day forecast
+                </Link>
+                {/* <Link
+                  to={`/weather-app/${name}/${target}`}
                   className='btn btn-dark btn-sm my-1'
                   onClick={() => {
                     target === 'forecast'
@@ -73,28 +81,28 @@ export default class Forecast extends Component {
                   }}
                 >
                   {btn}
-                </Link>
+                </Link> */}
               </div>
             </div>
             <Switch>
               <Route
                 exact
-                path='/weather-app/current/:name'
+                path='/weather-app/:name/current'
                 render={props => (
                   <div className='grid-3'>
                     {forecastToday.map(period => (
-                      <PeriodItem key={period.dt} period={period} />
+                      <PeriodItem key={period.dt} period={period} loc={loc} />
                     ))}
                   </div>
                 )}
               />
               <Route
                 exact
-                path='/weather-app/forecast/:name'
+                path='/weather-app/:name/forecast'
                 render={props => (
                   <div className='grid-4'>
                     {forecast16.map(day => (
-                      <DayItem key={day.ts} day={day} />
+                      <DayItem key={day.ts} day={day} loc={loc} />
                     ))}
                   </div>
                 )}

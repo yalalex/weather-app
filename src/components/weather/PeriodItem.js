@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PeriodItem = ({ period }) => {
+const PeriodItem = ({ period, loc }) => {
   const { dt_txt, main, wind, weather } = period,
-    time = new Date(dt_txt).toLocaleTimeString({
+    time = new Date(dt_txt).toLocaleTimeString(loc, {
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
+      second: undefined
     });
   return (
     <div className='card text-center'>

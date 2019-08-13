@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DayItem = ({ day }) => {
+const DayItem = ({ day, loc }) => {
   const {
       valid_date,
       max_temp,
@@ -12,10 +12,11 @@ const DayItem = ({ day }) => {
       rh,
       weather
     } = day,
-    date = new Date(valid_date).toLocaleDateString({
+    date = new Date(valid_date).toLocaleDateString(loc, {
       weekday: 'short',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
+      year: undefined
     });
   return (
     <div className='card text-center'>

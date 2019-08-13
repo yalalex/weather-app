@@ -13,6 +13,7 @@ import axios from 'axios';
 export default class App extends Component {
   state = {
     units: 'metric',
+    loc: 'en-GB',
     loading: false,
     alert: null,
     places: [],
@@ -100,22 +101,22 @@ export default class App extends Component {
   // Switch units
   switchUnits = () => {
     this.state.units === 'metric'
-      ? this.switcher('imperial')
-      : this.switcher('metric');
+      ? this.switcher('imperial', 'en-US')
+      : this.switcher('metric', 'en-GB');
   };
 
   // Update state after units switch
-  switcher = units => {
+  switcher = (units, loc) => {
     const { place } = this.state;
     if (place !== null) {
       this.setState(
         () => {
-          return { units: units };
+          return { units: units, loc: loc };
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
     } else {
-      this.setState({ units: units });
+      this.setState({ units: units, loc: loc });
       this.clearSearch();
     }
   };
@@ -123,12 +124,14 @@ export default class App extends Component {
   render() {
     const {
       places,
+      place,
       loading,
       alert,
       units,
       current,
       forecastToday,
-      forecast16
+      forecast16,
+      loc
     } = this.state;
     return (
       <Router>
@@ -136,18 +139,18 @@ export default class App extends Component {
           <Navbar switchUnits={this.switchUnits} units={units} />
           <div className='container'>
             <Alert alert={alert} />
+            <Search
+              searchPlaces={this.searchPlaces}
+              clearSearch={this.clearSearch}
+              showClear={places.length > 0 ? true : false}
+              setAlert={this.setAlert}
+            />
             <Switch>
               <Route
                 exact
                 path='/weather-app'
                 render={props => (
                   <Fragment>
-                    <Search
-                      searchPlaces={this.searchPlaces}
-                      clearSearch={this.clearSearch}
-                      showClear={places.length > 0 ? true : false}
-                      setAlert={this.setAlert}
-                    />
                     <Places
                       places={places}
                       loading={loading}
@@ -159,13 +162,14 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path='/weather-app/current/:name'
+                path='/weather-app/:name'
                 render={props => (
                   <Forecast
                     current={current}
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
+                    loc={loc}
                   />
                 )}
               />
