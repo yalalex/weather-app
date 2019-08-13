@@ -6,12 +6,8 @@ import request from 'superagent';
 export default class PlaceItem extends Component {
   state = {
     name: '',
-    weather: '',
     sky: '',
-    wind: '',
     temp: '',
-    pressure: '',
-    humidity: '',
     icon: ''
   };
 
@@ -35,10 +31,6 @@ export default class PlaceItem extends Component {
         this.setState({
           name: res.body.name,
           temp: res.body.main.temp.toFixed(),
-          wind: res.body.wind.speed,
-          pressure: res.body.main.pressure,
-          humidity: res.body.main.humidity,
-          weather: res.body.weather[0].main,
           sky: res.body.weather[0].description,
           icon: res.body.weather[0].icon
         });
@@ -50,8 +42,8 @@ export default class PlaceItem extends Component {
 
   render() {
     const { place, getForecast } = this.props,
-      { temp, sky, icon } = this.state;
-    // {const un = units === 'metric' ? '°C' : '°F'}
+      { name, temp, sky, icon } = this.state,
+      { city, regionCode, country, latitude, longitude } = place;
     return (
       <div className='card text-center'>
         <h1>{temp}°</h1>
@@ -61,16 +53,14 @@ export default class PlaceItem extends Component {
           width='100'
         />
         <h3>
-          {place.city}, {place.regionCode}
+          {city}, {regionCode}
         </h3>
-        <h4>{place.country}</h4>
+        <h4>{country}</h4>
         <div>
           <Link
-            to={`/weather-app/current/${this.state.name}`}
+            to={`/weather-app/current/${name}`}
             className='btn btn-dark btn-sm my-1'
-            onClick={() =>
-              getForecast(place.latitude, place.longitude, this.state)
-            }
+            onClick={() => getForecast(name, latitude, longitude)}
           >
             Select
           </Link>

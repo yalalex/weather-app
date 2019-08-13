@@ -16,13 +16,14 @@ export default class App extends Component {
     loading: false,
     alert: null,
     places: [],
+    place: null,
     current: {},
     forecastToday: [],
     forecast16: []
   };
 
   //Search places to get weather for
-  searchPlaces = text => {
+  searchPlaces = async text => {
     this.setState({ loading: true });
     request
       .get('https://wft-geo-db.p.rapidapi.com/v1/geo/cities')
@@ -51,8 +52,33 @@ export default class App extends Component {
   };
 
   //Get current weather details and 16-day forecast
-  getForecast = async (lat, lon, current) => {
+  getForecast = async (name, lat, lon) => {
     this.setState({ loading: true });
+    request
+      .get('https://community-open-weather-map.p.rapidapi.com/weather')
+      .query({ lat })
+      .query({ lon })
+      .query({ units: this.state.units })
+      .set('x-rapidapi-host', 'community-open-weather-map.p.rapidapi.com')
+      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
+      .set('Accept', 'application/json')
+      .then(respo => {
+        this.setState({
+          current: {
+            name: respo.body.name,
+            temp: respo.body.main.temp.toFixed(),
+            wind: respo.body.wind.speed,
+            pressure: respo.body.main.pressure,
+            humidity: respo.body.main.humidity,
+            weather: respo.body.weather[0].main,
+            sky: respo.body.weather[0].description,
+            icon: respo.body.weather[0].icon
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     request
       .get('https://community-open-weather-map.p.rapidapi.com/forecast')
       .query({ lat: lat })
@@ -64,9 +90,7 @@ export default class App extends Component {
       .then(resp => {
         const today = resp.body.list.slice(0, 9);
         this.setState({
-          forecastToday: today,
-          current: current,
-          loading: false
+          forecastToday: today
         });
       })
       .catch(err => {
@@ -79,17 +103,37 @@ export default class App extends Component {
       }`
     );
     this.setState({
-      forecast16: res.data.data
+      forecast16: res.data.data,
+      loading: false,
+      place: { name, lat, lon }
     });
     console.log(this.state.forecastToday);
+    console.log(this.state.forecast16);
+    console.log(this.state.current);
   };
 
-  //Switch C<->F
+  // Switch units
   switchUnits = () => {
     this.state.units === 'metric'
-      ? this.setState({ units: 'imperial' })
-      : this.setState({ units: 'metric' });
-    this.clearSearch();
+      ? this.switcher('imperial')
+      : this.switcher('metric');
+  };
+
+  // Update state after units switch
+  switcher = units => {
+    const { place } = this.state;
+    if (place !== null) {
+      this.setState(
+        () => {
+          return { units: units };
+        },
+        () => this.getForecast(place.name, place.lat, place.lon)
+      );
+      this.clearSearch();
+    } else {
+      this.setState({ units: units });
+      this.clearSearch();
+    }
   };
 
   render() {
@@ -135,10 +179,12 @@ export default class App extends Component {
                 path='/weather-app/current/:name'
                 render={props => (
                   <Forecast
+                    // getForecast={this.getForecast}
                     current={current}
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
+                    // place={place}
                   />
                 )}
               />
