@@ -52,7 +52,7 @@ export default class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 3000);
   };
 
-  //Get current weather details and 16-day forecast
+  //Get current weatherm 24-hr and 16-day forecast
   getForecast = async (name, lat, lon) => {
     const { units } = this.state;
     this.setState({ loading: true });
@@ -64,6 +64,7 @@ export default class App extends Component {
     this.setState({
       current: {
         name,
+        timezone: respo.data.timezone,
         temp: respo.data.main.temp.toFixed(),
         wind: respo.data.wind.speed,
         pressure: respo.data.main.pressure,
