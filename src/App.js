@@ -63,7 +63,7 @@ export default class App extends Component {
     );
     this.setState({
       current: {
-        name: respo.data.name,
+        name,
         temp: respo.data.main.temp.toFixed(),
         wind: respo.data.wind.speed,
         pressure: respo.data.main.pressure,
@@ -96,6 +96,7 @@ export default class App extends Component {
     console.log(this.state.forecastToday);
     console.log(this.state.forecast16);
     console.log(this.state.current);
+    console.log(this.state.place);
   };
 
   // Switch units
@@ -111,12 +112,12 @@ export default class App extends Component {
     if (place !== null) {
       this.setState(
         () => {
-          return { units: units, loc: loc };
+          return { units, loc };
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
     } else {
-      this.setState({ units: units, loc: loc });
+      this.setState({ units, loc });
       this.clearSearch();
     }
   };
@@ -139,18 +140,18 @@ export default class App extends Component {
           <Navbar switchUnits={this.switchUnits} units={units} />
           <div className='container'>
             <Alert alert={alert} />
-            <Search
-              searchPlaces={this.searchPlaces}
-              clearSearch={this.clearSearch}
-              showClear={places.length > 0 ? true : false}
-              setAlert={this.setAlert}
-            />
             <Switch>
               <Route
                 exact
                 path='/weather-app'
                 render={props => (
                   <Fragment>
+                    <Search
+                      searchPlaces={this.searchPlaces}
+                      clearSearch={this.clearSearch}
+                      showClear={places.length > 0 ? true : false}
+                      setAlert={this.setAlert}
+                    />
                     <Places
                       places={places}
                       loading={loading}

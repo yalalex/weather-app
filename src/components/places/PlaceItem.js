@@ -37,7 +37,7 @@ export default class PlaceItem extends Component {
 
   render() {
     const { place, getForecast } = this.props,
-      { name, temp, sky, icon } = this.state,
+      { temp, sky, icon } = this.state,
       { city, regionCode, country, latitude, longitude } = place;
     return (
       <div className='card text-center'>
@@ -53,9 +53,9 @@ export default class PlaceItem extends Component {
         <h4>{country}</h4>
         <div>
           <Link
-            to={`/weather-app/${name}`}
+            to={`/weather-app/${city}`}
             className='btn btn-dark btn-sm my-1'
-            onClick={() => getForecast(name, latitude, longitude)}
+            onClick={() => getForecast(city, latitude, longitude)}
           >
             Select
           </Link>
