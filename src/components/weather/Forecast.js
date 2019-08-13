@@ -18,7 +18,7 @@ export default class Forecast extends Component {
     const { current, forecastToday, forecast16, loading, loc } = this.props,
       {
         name,
-        timezone,
+        // timezone,
         weather,
         sky,
         wind,
@@ -64,7 +64,7 @@ export default class Forecast extends Component {
                   <li>Pressure: {pressure.toFixed()} mbar</li>
                 </ul>
                 <Link
-                  to={`/weather-app/${name}/current`}
+                  to={`/weather-app/${name}/today`}
                   className='btn btn-dark btn-sm my-1'
                 >
                   24-hr forecast
@@ -75,29 +75,12 @@ export default class Forecast extends Component {
                 >
                   16-day forecast
                 </Link>
-                {/* <Link
-                  to={`/weather-app/${name}/${target}`}
-                  className='btn btn-dark btn-sm my-1'
-                  onClick={() => {
-                    target === 'forecast'
-                      ? this.setState({
-                          btn: '24-hr forecast',
-                          target: 'current'
-                        })
-                      : this.setState({
-                          btn: '16-day forecast',
-                          target: 'forecast'
-                        });
-                  }}
-                >
-                  {btn}
-                </Link> */}
               </div>
             </div>
             <Switch>
               <Route
                 exact
-                path='/weather-app/:name/current'
+                path='/weather-app/:name/today'
                 render={props => (
                   <div className='grid-3'>
                     {forecastToday.map(period => (

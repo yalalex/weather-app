@@ -52,7 +52,7 @@ export default class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 3000);
   };
 
-  //Get current weatherm 24-hr and 16-day forecast
+  //Get current weather and 24-hr/16-day forecast
   getForecast = async (name, lat, lon) => {
     const { units } = this.state;
     this.setState({ loading: true });
@@ -126,7 +126,7 @@ export default class App extends Component {
   render() {
     const {
       places,
-      place,
+      // place,
       loading,
       alert,
       units,
@@ -164,7 +164,7 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path='/weather-app/:name'
+                path='/weather-app/:name/current'
                 render={props => (
                   <Forecast
                     current={current}
