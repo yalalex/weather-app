@@ -20,7 +20,7 @@ export default class PlaceItem extends Component {
   async componentDidMount() {
     const { place, units } = this.props;
     const res = await axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${
+      `https://api.openweathermap.org/data/2.5/weather?lat=${
         place.latitude
       }&lon=${place.longitude}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY

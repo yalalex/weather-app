@@ -56,7 +56,7 @@ export default class App extends Component {
     const { units } = this.state;
     this.setState({ loading: true });
     const respo = await axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
@@ -73,7 +73,7 @@ export default class App extends Component {
       }
     });
     const resp = await axios.get(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
