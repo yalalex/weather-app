@@ -47,7 +47,8 @@ export default class App extends Component {
   //Get weather for search request
   getPlaceWeather = places => {
     const { units } = this.state;
-    places.map(async place => {
+    const places1 = [...places];
+    places1.map(async place => {
       let { latitude, longitude } = place;
       let res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
@@ -59,6 +60,7 @@ export default class App extends Component {
         sky: res.data.weather[0].description,
         icon: res.data.weather[0].icon
       });
+      this.setState({ places: places1 });
     });
   };
 
@@ -153,8 +155,7 @@ export default class App extends Component {
       units,
       current,
       forecastToday,
-      forecast16,
-      loc
+      forecast16
     } = this.state;
     return (
       <Router>
@@ -178,7 +179,6 @@ export default class App extends Component {
                       places={places}
                       loading={loading}
                       getForecast={this.getForecast}
-                      units={units}
                     />
                   </Fragment>
                 )}
@@ -192,7 +192,6 @@ export default class App extends Component {
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
-                    loc={loc}
                   />
                 )}
               />

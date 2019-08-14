@@ -16,8 +16,7 @@ export default class Forecast extends Component {
     forecastToday: PropTypes.array.isRequired,
     forecast16: PropTypes.array.isRequired,
     current: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    loc: PropTypes.string.isRequired
+    loading: PropTypes.bool.isRequired
   };
 
   render() {

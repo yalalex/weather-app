@@ -44,7 +44,7 @@ const PlaceItem = ({ place, getForecast }) => {
       <h1>{temp}°</h1>
       <img
         alt={sky}
-        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         width='100'
       />
       <h3>
