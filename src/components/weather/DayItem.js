@@ -9,7 +9,7 @@ const DayItem = ({ day }) => {
       <ul>
         <li>
           <h3>
-            <Moment unix format='MMM Do'>
+            <Moment unix format='ddd Do'>
               {ts}
             </Moment>
           </h3>
