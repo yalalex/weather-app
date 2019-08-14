@@ -9,7 +9,6 @@ import About from './components/pages/About';
 import './App.css';
 import request from 'superagent';
 import axios from 'axios';
-// import Moment from 'react-moment';
 
 export default class App extends Component {
   state = {

@@ -3,32 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const PlaceItem = ({ place, getForecast }) => {
-  // state = {
-  //   name: '',
-  //   sky: '',
-  //   temp: '',
-  //   icon: ''
-  // };
-
-  // async componentDidMount() {
-  //   const { place, units } = this.props;
-  //   const res = await axios.get(
-  //     `https://api.openweathermap.org/data/2.5/weather?lat=${
-  //       place.latitude
-  //     }&lon=${place.longitude}&units=${units}&APPID=${
-  //       process.env.REACT_APP_OPENWEATHER_KEY
-  //     }`
-  //   );
-  //   this.setState({
-  //     name: res.data.name,
-  //     temp: res.data.main.temp.toFixed(),
-  //     sky: res.data.weather[0].description,
-  //     icon: res.data.weather[0].icon
-  //   });
-  //   console.log(this.state);
-  // }
-
-  console.log(place);
   const {
     city,
     regionCode,
