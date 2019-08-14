@@ -35,7 +35,7 @@ export default class App extends Component {
       .set('Accept', 'application/json')
       .then(res => {
         this.setState({ places: res.body.data, loading: false });
-        this.getPlaceWeather(this.state.places);
+        this.getPlaceWeather();
         console.log(this.state.places);
       })
       .catch(err => {
@@ -44,8 +44,8 @@ export default class App extends Component {
   };
 
   //Get weather for search request
-  getPlaceWeather = places => {
-    const { units } = this.state;
+  getPlaceWeather = () => {
+    const { units, places } = this.state;
     const places1 = [...places];
     places1.map(async place => {
       let { latitude, longitude } = place;
@@ -130,8 +130,8 @@ export default class App extends Component {
 
   // Update state after units switch
   switcher = units => {
-    const { place } = this.state;
-    if (place !== null) {
+    const { place, places } = this.state;
+    if (place !== null && places.length > 0) {
       this.setState(
         () => {
           return { units };
@@ -139,10 +139,14 @@ export default class App extends Component {
         () => this.getForecast(place.name, place.lat, place.lon)
       );
       this.clearSearch();
-    } else {
-      this.setState({ units });
-      this.clearSearch();
-    }
+    } else if (place === null && places.length > 0) {
+      this.setState(
+        () => {
+          return { units };
+        },
+        () => this.getPlaceWeather()
+      );
+    } else this.setState({ units });
   };
 
   render() {
