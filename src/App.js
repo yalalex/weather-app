@@ -36,11 +36,30 @@ export default class App extends Component {
       .set('Accept', 'application/json')
       .then(res => {
         this.setState({ places: res.body.data, loading: false });
+        this.getPlaceWeather(this.state.places);
         console.log(this.state.places);
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  //Get weather for search request
+  getPlaceWeather = places => {
+    const { units } = this.state;
+    places.map(async place => {
+      let { latitude, longitude } = place;
+      let res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
+          process.env.REACT_APP_OPENWEATHER_KEY
+        }`
+      );
+      Object.assign(place, {
+        temp: res.data.main.temp.toFixed(),
+        sky: res.data.weather[0].description,
+        icon: res.data.weather[0].icon
+      });
+    });
   };
 
   //Clear search
