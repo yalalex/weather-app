@@ -9,11 +9,11 @@ import About from './components/pages/About';
 import './App.css';
 import request from 'superagent';
 import axios from 'axios';
+// import Moment from 'react-moment';
 
 export default class App extends Component {
   state = {
     units: 'metric',
-    loc: 'en-GB',
     loading: false,
     alert: null,
     places: [],
@@ -65,6 +65,7 @@ export default class App extends Component {
       current: {
         name,
         timezone: respo.data.timezone,
+        dt: respo.data.dt,
         temp: respo.data.main.temp.toFixed(),
         wind: respo.data.wind.speed,
         pressure: respo.data.main.pressure,
@@ -103,22 +104,23 @@ export default class App extends Component {
   // Switch units
   switchUnits = () => {
     this.state.units === 'metric'
-      ? this.switcher('imperial', 'en-US')
-      : this.switcher('metric', 'en-GB');
+      ? this.switcher('imperial')
+      : this.switcher('metric');
   };
 
   // Update state after units switch
-  switcher = (units, loc) => {
+  switcher = units => {
     const { place } = this.state;
     if (place !== null) {
       this.setState(
         () => {
-          return { units, loc };
+          return { units };
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
+      this.clearSearch();
     } else {
-      this.setState({ units, loc });
+      this.setState({ units });
       this.clearSearch();
     }
   };
@@ -164,7 +166,7 @@ export default class App extends Component {
               />
               <Route
                 exact
-                path='/weather-app/:name/current'
+                path='/weather-app/current/:name'
                 render={props => (
                   <Forecast
                     current={current}

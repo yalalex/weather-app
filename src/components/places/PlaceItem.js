@@ -53,7 +53,7 @@ export default class PlaceItem extends Component {
         <h4>{country}</h4>
         <div>
           <Link
-            to={`/weather-app/${city}/current`}
+            to={`/weather-app/current/${city}`}
             className='btn btn-dark btn-sm my-1'
             onClick={() => getForecast(city, latitude, longitude)}
           >

@@ -1,18 +1,19 @@
 import React from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const PeriodItem = ({ period, loc }) => {
-  const { dt_txt, main, wind, weather } = period,
-    time = new Date(dt_txt).toLocaleTimeString(loc, {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: undefined
-    });
+const PeriodItem = ({ period, offset }) => {
+  const { dt, main, wind, weather } = period,
+    time = dt + offset;
   return (
     <div className='card text-center'>
       <ul>
         <li>
-          <h3>{time}</h3>
+          <h3>
+            <Moment unix format='LT'>
+              {time}
+            </Moment>
+          </h3>
         </li>
         <li>
           <img

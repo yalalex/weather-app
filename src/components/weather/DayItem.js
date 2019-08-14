@@ -1,28 +1,18 @@
 import React from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const DayItem = ({ day, loc }) => {
-  const {
-      valid_date,
-      max_temp,
-      min_temp,
-      wind_spd,
-      pop,
-      pres,
-      rh,
-      weather
-    } = day,
-    date = new Date(valid_date).toLocaleDateString(loc, {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: undefined
-    });
+const DayItem = ({ day }) => {
+  const { ts, max_temp, min_temp, wind_spd, pop, pres, rh, weather } = day;
   return (
     <div className='card text-center'>
       <ul>
         <li>
-          <h3>{date}</h3>
+          <h3>
+            <Moment unix format='MMM Do'>
+              {ts}
+            </Moment>
+          </h3>
         </li>
         <li>
           <img

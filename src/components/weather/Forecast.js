@@ -4,8 +4,14 @@ import DayItem from './DayItem';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Moment from 'react-moment';
 
 export default class Forecast extends Component {
+  state = {
+    btn: '16-day forecast',
+    target: '16-day'
+  };
+
   static propTypes = {
     forecastToday: PropTypes.array.isRequired,
     forecast16: PropTypes.array.isRequired,
@@ -15,10 +21,12 @@ export default class Forecast extends Component {
   };
 
   render() {
-    const { current, forecastToday, forecast16, loading, loc } = this.props,
+    const { current, forecastToday, forecast16, loading } = this.props,
+      { btn, target } = this.state,
       {
         name,
-        // timezone,
+        timezone,
+        dt,
         weather,
         sky,
         wind,
@@ -27,11 +35,8 @@ export default class Forecast extends Component {
         humidity,
         icon
       } = current,
-      time = new Date().toLocaleTimeString(loc, {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: undefined
-      });
+      offset = new Date().getTimezoneOffset() * 60 + timezone,
+      time = dt + offset;
     if (forecastToday.length === 0) return null;
     else if (loading) {
       return <Spinner />;
@@ -51,7 +56,11 @@ export default class Forecast extends Component {
                 <div style={{ margin: 'auto 0' }}>
                   <h1>{temp}°</h1>
                   <h2>{name}</h2>
-                  <h3>{time}</h3>
+                  <h3>
+                    <Moment unix format='LT'>
+                      {time}
+                    </Moment>
+                  </h3>
                 </div>
               </div>
               <div style={{ padding: '0.7rem 0' }}>
@@ -64,38 +73,47 @@ export default class Forecast extends Component {
                   <li>Pressure: {pressure.toFixed()} mbar</li>
                 </ul>
                 <Link
-                  to={`/weather-app/${name}/today`}
+                  to={`/weather-app/${target}/${name}`}
                   className='btn btn-dark btn-sm my-1'
+                  onClick={() => {
+                    target === 'forecast'
+                      ? this.setState({
+                          btn: '24-hr forecast',
+                          target: 'current'
+                        })
+                      : this.setState({
+                          btn: '16-day forecast',
+                          target: '16-day'
+                        });
+                  }}
                 >
-                  24-hr forecast
-                </Link>
-                <Link
-                  to={`/weather-app/${name}/forecast`}
-                  className='btn btn-dark btn-sm my-1'
-                >
-                  16-day forecast
+                  {btn}
                 </Link>
               </div>
             </div>
             <Switch>
               <Route
                 exact
-                path='/weather-app/:name/today'
+                path='/weather-app/current/:name'
                 render={props => (
                   <div className='grid-3'>
                     {forecastToday.map(period => (
-                      <PeriodItem key={period.dt} period={period} loc={loc} />
+                      <PeriodItem
+                        key={period.dt}
+                        period={period}
+                        offset={offset}
+                      />
                     ))}
                   </div>
                 )}
               />
               <Route
                 exact
-                path='/weather-app/:name/forecast'
+                path='/weather-app/16-day/:name'
                 render={props => (
                   <div className='grid-4'>
                     {forecast16.map(day => (
-                      <DayItem key={day.ts} day={day} loc={loc} />
+                      <DayItem key={day.ts} day={day} />
                     ))}
                   </div>
                 )}
