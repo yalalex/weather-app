@@ -75,7 +75,7 @@ export default class Forecast extends Component {
                   to={`/weather-app/${target}/${name}`}
                   className='btn btn-dark btn-sm my-1'
                   onClick={() => {
-                    target === 'forecast'
+                    target === '16-day'
                       ? this.setState({
                           btn: '24-hr forecast',
                           target: 'current'
