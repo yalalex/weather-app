@@ -91,7 +91,7 @@ export default class Forecast extends Component {
               <div style={{ padding: '0.7rem 0' }}>
                 <ul>
                   <li>
-                    <h3>{weather}</h3>
+                    <h3>{lang === 'en' ? weather : 'Текущие условия:'}</h3>
                   </li>
                   <li>
                     {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
