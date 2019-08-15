@@ -243,7 +243,11 @@ export default class App extends Component {
                   />
                 )}
               />
-              <Route exact path='/weather-app/about' component={About} />
+              <Route
+                exact
+                path='/weather-app/about'
+                render={props => <About lang={lang} />}
+              />
             </Switch>
           </div>
         </div>

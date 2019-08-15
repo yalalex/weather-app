@@ -12,7 +12,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
         </li>
         <li>
           <Link to='/weather-app/about'>
-            {lang === 'en' ? 'About' : 'О нас'}
+            {lang === 'en' ? 'About' : 'О приложении'}
           </Link>
         </li>
         <li>
