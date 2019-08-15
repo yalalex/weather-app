@@ -2,7 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const DayItem = ({ day }) => {
+const DayItem = ({ day, lang }) => {
   const { ts, max_temp, min_temp, wind_spd, pop, pres, rh, weather } = day;
   return (
     <div className='card text-center'>
@@ -28,10 +28,22 @@ const DayItem = ({ day }) => {
             {max_temp.toFixed()}°/{min_temp.toFixed()}°
           </h2>
         </li>
-        <li>Precipitation: {pop}%</li>
-        <li>Humidity: {rh}%</li>
-        <li>Wind: {wind_spd.toFixed(1)} m/s</li>
-        <li>Pressure: {pres.toFixed()} mbar</li>
+        <li>
+          {lang === 'en' ? 'Precipitation: ' : 'Осадки: '}
+          {pop}%
+        </li>
+        <li>
+          {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
+          {rh}%
+        </li>
+        <li>
+          {lang === 'en' ? 'Wind: ' : 'Ветер: '}
+          {wind_spd.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+        </li>
+        <li>
+          {lang === 'en' ? 'Pressure: ' : 'Давление: '}
+          {pres.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
+        </li>
       </ul>
     </div>
   );

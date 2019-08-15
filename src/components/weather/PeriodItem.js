@@ -2,7 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const PeriodItem = ({ period, offset }) => {
+const PeriodItem = ({ period, offset, lang }) => {
   const { dt, main, wind, weather } = period,
     time = dt + offset;
   return (
@@ -26,9 +26,18 @@ const PeriodItem = ({ period, offset }) => {
           <h2>{main.temp.toFixed()}°</h2>
         </li>
         {/* <li>Precipitation: {rain}%</li> */}
-        <li>Humidity: {main.humidity}%</li>
-        <li>Wind: {wind.speed.toFixed(1)} m/s</li>
-        <li>Pressure: {main.pressure.toFixed()} mbar</li>
+        <li>
+          {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
+          {main.humidity}%
+        </li>
+        <li>
+          {lang === 'en' ? 'Wind: ' : 'Ветер: '}
+          {wind.speed.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+        </li>
+        <li>
+          {lang === 'en' ? 'Pressure: ' : 'Давление: '}
+          {main.pressure.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
+        </li>
       </ul>
     </div>
   );

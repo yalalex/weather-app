@@ -8,8 +8,8 @@ import Moment from 'react-moment';
 
 export default class Forecast extends Component {
   state = {
-    btn: '16-day forecast',
-    target: '16-day'
+    btn: '',
+    target: ''
   };
 
   static propTypes = {
@@ -19,8 +19,17 @@ export default class Forecast extends Component {
     loading: PropTypes.bool.isRequired
   };
 
+  componentDidMount() {
+    this.props.lang === 'en'
+      ? this.setState({ btn: '16-day forecast', target: '16-day' })
+      : this.setState({ btn: 'Прогноз на 16 дней', target: '16-day' });
+    // : this.props.lang === 'en'
+    // ? this.setState({ btn: '24-hr forecast', target: 'current' })
+    // : this.setState({ btn: 'Прогноз на 24 часа', target: 'current' });
+  }
+
   render() {
-    const { current, forecastToday, forecast16, loading } = this.props,
+    const { current, forecastToday, forecast16, loading, lang } = this.props,
       { btn, target } = this.state,
       {
         name,
@@ -67,21 +76,36 @@ export default class Forecast extends Component {
                   <li>
                     <h3>{weather}</h3>
                   </li>
-                  <li>Humidity: {humidity}%</li>
-                  <li>Wind: {wind.toFixed(1)} m/s</li>
-                  <li>Pressure: {pressure.toFixed()} mbar</li>
+                  <li>
+                    {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
+                    {humidity}%
+                  </li>
+                  <li>
+                    {lang === 'en' ? 'Wind: ' : 'Ветер: '}
+                    {wind.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+                  </li>
+                  <li>
+                    {lang === 'en' ? 'Pressure: ' : 'Давление: '}
+                    {pressure.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
+                  </li>
                 </ul>
                 <Link
                   to={`/weather-app/${target}/${name}`}
                   className='btn btn-dark btn-sm my-1'
                   onClick={() => {
+                    const button24 =
+                        lang === 'en' ? '24-hr forecast' : 'Прогноз на 24 часа',
+                      button16 =
+                        lang === 'en'
+                          ? '16-day forecast'
+                          : 'Прогноз на 16 дней';
                     target === '16-day'
                       ? this.setState({
-                          btn: '24-hr forecast',
+                          btn: button24,
                           target: 'current'
                         })
                       : this.setState({
-                          btn: '16-day forecast',
+                          btn: button16,
                           target: '16-day'
                         });
                   }}
@@ -101,6 +125,7 @@ export default class Forecast extends Component {
                         key={period.dt}
                         period={period}
                         offset={offset}
+                        lang={lang}
                       />
                     ))}
                   </div>
@@ -112,7 +137,7 @@ export default class Forecast extends Component {
                 render={props => (
                   <div className='grid-4'>
                     {forecast16.map(day => (
-                      <DayItem key={day.ts} day={day} />
+                      <DayItem key={day.ts} day={day} lang={lang} />
                     ))}
                   </div>
                 )}

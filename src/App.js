@@ -13,6 +13,7 @@ import axios from 'axios';
 export default class App extends Component {
   state = {
     units: 'metric',
+    lang: 'en',
     loading: false,
     alert: null,
     places: [],
@@ -30,6 +31,7 @@ export default class App extends Component {
       .query({ limit: '10' })
       .query({ namePrefix: text })
       .query({ sort: '-population' })
+      .query({ languageCode: this.state.lang })
       .set('x-rapidapi-host', 'wft-geo-db.p.rapidapi.com')
       .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
       .set('Accept', 'application/json')
@@ -105,8 +107,7 @@ export default class App extends Component {
     const today = resp.data.list.slice(0, 9);
     const { sunrise, sunset } = this.state.current;
     today.map(async period => {
-      //Change icons according to time of day
-      console.log(period.dt);
+      //Change icons according to local time
       if (sunset < period.dt && period.dt < sunrise + 86400) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
       } else if (sunrise < period.dt && period.dt < sunset) {
@@ -135,6 +136,13 @@ export default class App extends Component {
     console.log(this.state.place);
   };
 
+  //Switch language
+  switchLang = () => {
+    this.state.lang === 'en'
+      ? this.setState({ lang: 'ru' })
+      : this.setState({ lang: 'en' });
+  };
+
   // Switch units
   switchUnits = () => {
     this.state.units === 'metric'
@@ -143,25 +151,39 @@ export default class App extends Component {
   };
 
   // Update state after units switch
-  switcher = units => {
-    const { place, places } = this.state;
-    if (place !== null && places.length > 0) {
+  switcher = (units, loc) => {
+    const { place } = this.state;
+    if (place !== null) {
       this.setState(
         () => {
-          return { units };
+          return { units, loc };
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
+    } else {
+      this.setState({ units, loc });
       this.clearSearch();
-    } else if (place === null && places.length > 0) {
-      this.setState(
-        () => {
-          return { units };
-        },
-        () => this.getPlaceWeather()
-      );
-    } else this.setState({ units });
+    }
   };
+  // switcher = units => {
+  //   const { place, places } = this.state;
+  //   if (place !== null && places.length > 0) {
+  //     this.setState(
+  //       () => {
+  //         return { units };
+  //       },
+  //       () => this.getForecast(place.name, place.lat, place.lon)
+  //     );
+  //     this.clearSearch();
+  //   } else if (place === null && places.length > 0) {
+  //     this.setState(
+  //       () => {
+  //         return { units };
+  //       },
+  //       () => this.getPlaceWeather()
+  //     );
+  //   } else this.setState({ units });
+  // };
 
   render() {
     const {
@@ -170,6 +192,7 @@ export default class App extends Component {
       loading,
       alert,
       units,
+      lang,
       current,
       forecastToday,
       forecast16
@@ -177,9 +200,14 @@ export default class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <Navbar switchUnits={this.switchUnits} units={units} />
+          <Navbar
+            switchUnits={this.switchUnits}
+            units={units}
+            switchLang={this.switchLang}
+            lang={lang}
+          />
           <div className='container'>
-            <Alert alert={alert} />
+            <Alert alert={alert} lang={lang} />
             <Switch>
               <Route
                 exact
@@ -191,11 +219,13 @@ export default class App extends Component {
                       clearSearch={this.clearSearch}
                       showClear={places.length > 0 ? true : false}
                       setAlert={this.setAlert}
+                      lang={lang}
                     />
                     <Places
                       places={places}
                       loading={loading}
                       getForecast={this.getForecast}
+                      lang={lang}
                     />
                   </Fragment>
                 )}
@@ -209,6 +239,7 @@ export default class App extends Component {
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
+                    lang={lang}
                   />
                 )}
               />

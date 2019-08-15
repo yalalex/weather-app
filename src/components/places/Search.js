@@ -16,7 +16,11 @@ export default class Search extends Component {
   onSubmit = e => {
     e.preventDefault();
     if (this.state.text === '') {
-      this.props.setAlert('Please enter something', 'dark');
+      const alert =
+        this.props.lang === 'en'
+          ? 'Please enter something'
+          : 'Пожалуйста, введите что-нибудь';
+      this.props.setAlert(alert, 'dark');
     } else {
       this.props.searchPlaces(this.state.text);
       this.setState({ text: '' });
@@ -33,12 +37,16 @@ export default class Search extends Component {
             type='text'
             name='text'
             value={this.state.text}
-            placeholder='Enter City Name...'
+            placeholder={
+              this.props.lang === 'en'
+                ? 'Enter City Name...'
+                : 'Введите название города...'
+            }
             onChange={this.onChange}
           />
           <input
             type='submit'
-            value='Search'
+            value={this.props.lang === 'en' ? 'Search' : 'Поиск'}
             className='btn btn-dark btn-block'
           />
         </form>
@@ -47,7 +55,7 @@ export default class Search extends Component {
             className='btn btn-grey btn-block'
             onClick={this.props.clearSearch}
           >
-            Clear
+            {this.props.lang === 'en' ? 'Clear' : 'Очистить'}
           </button>
         )}
       </div>
