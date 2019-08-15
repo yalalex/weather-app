@@ -10,7 +10,7 @@ const PeriodItem = ({ period, offset, lang }) => {
       <ul>
         <li>
           <h3>
-            <Moment unix format='LT'>
+            <Moment locale={lang} unix format='LT'>
               {time}
             </Moment>
           </h3>

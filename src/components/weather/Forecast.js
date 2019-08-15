@@ -65,7 +65,7 @@ export default class Forecast extends Component {
                   <h1>{temp}°</h1>
                   <h2>{name}</h2>
                   <h3>
-                    <Moment unix format='LT'>
+                    <Moment locale={lang} unix format='LT'>
                       {time}
                     </Moment>
                   </h3>

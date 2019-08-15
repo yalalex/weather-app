@@ -9,7 +9,7 @@ const DayItem = ({ day, lang }) => {
       <ul>
         <li>
           <h3>
-            <Moment unix format='ddd Do'>
+            <Moment locale={lang} unix format='ddd Do'>
               {ts}
             </Moment>
           </h3>

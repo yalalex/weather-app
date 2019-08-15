@@ -40,7 +40,7 @@ export default class Search extends Component {
             placeholder={
               this.props.lang === 'en'
                 ? 'Enter City Name...'
-                : 'Введите название города...'
+                : 'Введите название городана русском языке...'
             }
             onChange={this.onChange}
           />
