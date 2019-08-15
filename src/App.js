@@ -92,7 +92,9 @@ export default class App extends Component {
         humidity: respo.data.main.humidity,
         weather: respo.data.weather[0].main,
         sky: respo.data.weather[0].description,
-        icon: respo.data.weather[0].icon
+        icon: respo.data.weather[0].icon,
+        sunrise: respo.data.sys.sunrise,
+        sunset: respo.data.sys.sunset
       }
     });
     const resp = await axios.get(
@@ -101,6 +103,18 @@ export default class App extends Component {
       }`
     );
     const today = resp.data.list.slice(0, 9);
+    const { sunrise, sunset } = this.state.current;
+    today.map(async period => {
+      //Change icons according to time of day
+      console.log(period.dt);
+      if (sunset < period.dt && period.dt < sunrise + 86400) {
+        period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
+      } else if (sunrise < period.dt && period.dt < sunset) {
+        period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
+      } else if (sunset - 86400 < period.dt && period.dt < sunrise) {
+        period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
+      }
+    });
     this.setState({
       forecastToday: today
     });
