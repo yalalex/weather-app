@@ -143,47 +143,33 @@ export default class App extends Component {
       : this.setState({ lang: 'en' });
   };
 
-  // Switch units
+  // Switch units init
   switchUnits = () => {
     this.state.units === 'metric'
       ? this.switcher('imperial')
       : this.switcher('metric');
   };
 
-  // Update state after units switch
-  switcher = (units, loc) => {
-    const { place } = this.state;
+  //Switch units
+  switcher = units => {
+    const { place, places } = this.state;
     if (place !== null) {
       this.setState(
         () => {
-          return { units, loc };
+          return { units };
         },
         () => this.getForecast(place.name, place.lat, place.lon)
       );
-    } else {
-      this.setState({ units, loc });
       this.clearSearch();
-    }
+    } else if (place === null && places.length > 0) {
+      this.setState(
+        () => {
+          return { units };
+        },
+        () => this.getPlaceWeather()
+      );
+    } else this.setState({ units });
   };
-  // switcher = units => {
-  //   const { place, places } = this.state;
-  //   if (place !== null && places.length > 0) {
-  //     this.setState(
-  //       () => {
-  //         return { units };
-  //       },
-  //       () => this.getForecast(place.name, place.lat, place.lon)
-  //     );
-  //     this.clearSearch();
-  //   } else if (place === null && places.length > 0) {
-  //     this.setState(
-  //       () => {
-  //         return { units };
-  //       },
-  //       () => this.getPlaceWeather()
-  //     );
-  //   } else this.setState({ units });
-  // };
 
   render() {
     const {
@@ -235,6 +221,7 @@ export default class App extends Component {
                 path='/weather-app/current/:name'
                 render={props => (
                   <Forecast
+                    {...props}
                     current={current}
                     forecastToday={forecastToday}
                     forecast16={forecast16}

@@ -20,6 +20,7 @@ export default class Forecast extends Component {
   };
 
   componentDidMount() {
+    // this.props.match.path === '/weather-app/current/:name' &&
     this.props.lang === 'en'
       ? this.setState({ btn: '16-day forecast', target: '16-day' })
       : this.setState({ btn: 'Прогноз на 16 дней', target: '16-day' });
@@ -27,6 +28,22 @@ export default class Forecast extends Component {
     // ? this.setState({ btn: '24-hr forecast', target: 'current' })
     // : this.setState({ btn: 'Прогноз на 24 часа', target: 'current' });
   }
+
+  switchButton = () => {
+    const { lang } = this.props,
+      { target } = this.state;
+    const button24 = lang === 'en' ? '24-hr forecast' : 'Прогноз на 24 часа',
+      button16 = lang === 'en' ? '16-day forecast' : 'Прогноз на 16 дней';
+    target === '16-day'
+      ? this.setState({
+          btn: button24,
+          target: 'current'
+        })
+      : this.setState({
+          btn: button16,
+          target: '16-day'
+        });
+  };
 
   render() {
     const { current, forecastToday, forecast16, loading, lang } = this.props,
@@ -92,23 +109,7 @@ export default class Forecast extends Component {
                 <Link
                   to={`/weather-app/${target}/${name}`}
                   className='btn btn-dark btn-sm my-1'
-                  onClick={() => {
-                    const button24 =
-                        lang === 'en' ? '24-hr forecast' : 'Прогноз на 24 часа',
-                      button16 =
-                        lang === 'en'
-                          ? '16-day forecast'
-                          : 'Прогноз на 16 дней';
-                    target === '16-day'
-                      ? this.setState({
-                          btn: button24,
-                          target: 'current'
-                        })
-                      : this.setState({
-                          btn: button16,
-                          target: '16-day'
-                        });
-                  }}
+                  onClick={() => this.switchButton()}
                 >
                   {btn}
                 </Link>
