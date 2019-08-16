@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const PlaceItem = ({ place, getForecast }) => {
+const PlaceItem = ({ place, getForecast, lang }) => {
   const {
     city,
     regionCode,
