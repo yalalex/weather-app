@@ -32,7 +32,8 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
 
 Navbar.propTypes = {
   units: PropTypes.string.isRequired,
-  switchUnits: PropTypes.func.isRequired
+  switchUnits: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default Navbar;

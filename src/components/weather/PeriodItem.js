@@ -44,7 +44,8 @@ const PeriodItem = ({ period, offset, lang }) => {
 };
 
 PeriodItem.propTypes = {
-  period: PropTypes.object.isRequired
+  period: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default PeriodItem;

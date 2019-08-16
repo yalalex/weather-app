@@ -10,7 +10,8 @@ export default class Search extends Component {
     searchPlaces: PropTypes.func.isRequired,
     clearSearch: PropTypes.func.isRequired,
     setAlert: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired
+    showClear: PropTypes.bool.isRequired,
+    lang: PropTypes.string.isRequired
   };
 
   onSubmit = e => {

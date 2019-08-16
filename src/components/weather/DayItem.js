@@ -50,7 +50,8 @@ const DayItem = ({ day, lang }) => {
 };
 
 DayItem.propTypes = {
-  day: PropTypes.object.isRequired
+  day: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default DayItem;

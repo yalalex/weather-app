@@ -40,7 +40,8 @@ const PlaceItem = ({ place, getForecast, lang }) => {
 
 PlaceItem.propTypes = {
   place: PropTypes.object.isRequired,
-  getForecast: PropTypes.func.isRequired
+  getForecast: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default PlaceItem;

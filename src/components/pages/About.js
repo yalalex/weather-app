@@ -31,4 +31,8 @@ const About = ({ lang }) => {
   );
 };
 
+About.propTypes = {
+  lang: PropTypes.string.isRequired
+};
+
 export default About;
