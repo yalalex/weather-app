@@ -8,11 +8,11 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
       <h1>Weather app</h1>
       <ul>
         <li>
-          <Link to='/weather-app'>{lang === 'en' ? 'Home' : 'На главную'}</Link>
+          <Link to='/weather-app'>{lang === 'en' ? 'Home' : 'Домой'}</Link>
         </li>
         <li>
           <Link to='/weather-app/about'>
-            {lang === 'en' ? 'About' : 'О приложении'}
+            {lang === 'en' ? 'About' : 'Инфо'}
           </Link>
         </li>
         <li>
