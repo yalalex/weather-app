@@ -31,7 +31,7 @@ const PlaceItem = ({ place, getForecast }) => {
           className='btn btn-dark btn-sm my-1'
           onClick={() => getForecast(city, latitude, longitude)}
         >
-          Select
+          {lang === 'en' ? 'Select' : 'Выбрать'}
         </Link>
       </div>
     </div>
