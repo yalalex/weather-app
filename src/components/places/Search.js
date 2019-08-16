@@ -24,6 +24,7 @@ export default class Search extends Component {
     } else {
       this.props.searchPlaces(this.state.text);
       this.setState({ text: '' });
+      this.props.history.push('/weather-app');
     }
   };
 

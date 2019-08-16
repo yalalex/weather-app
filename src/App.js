@@ -1,10 +1,10 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import Search from './components/places/Search';
 import Forecast from './components/weather/Forecast';
-import Places from './components/places/Places';
+import PlaceItem from './components/places/PlaceItem';
 import About from './components/pages/About';
 import './App.css';
 import request from 'superagent';
@@ -197,26 +197,38 @@ export default class App extends Component {
           />
           <div className='container'>
             <Alert alert={alert} lang={lang} />
+            <Route
+              path='/weather-app'
+              render={props => (
+                <Search
+                  {...props}
+                  searchPlaces={this.searchPlaces}
+                  clearSearch={this.clearSearch}
+                  showClear={
+                    places.length > 0 && window.location.path === '/weather-app'
+                      ? true
+                      : false
+                  }
+                  setAlert={this.setAlert}
+                  lang={lang}
+                />
+              )}
+            />
             <Switch>
               <Route
                 exact
                 path='/weather-app'
                 render={props => (
-                  <Fragment>
-                    <Search
-                      searchPlaces={this.searchPlaces}
-                      clearSearch={this.clearSearch}
-                      showClear={places.length > 0 ? true : false}
-                      setAlert={this.setAlert}
-                      lang={lang}
-                    />
-                    <Places
-                      places={places}
-                      loading={loading}
-                      getForecast={this.getForecast}
-                      lang={lang}
-                    />
-                  </Fragment>
+                  <div className='grid-3'>
+                    {places.map(place => (
+                      <PlaceItem
+                        key={place.id}
+                        place={place}
+                        getForecast={this.getForecast}
+                        lang={lang}
+                      />
+                    ))}
+                  </div>
                 )}
               />
               <Route
