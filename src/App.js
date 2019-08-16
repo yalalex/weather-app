@@ -205,7 +205,8 @@ export default class App extends Component {
                   searchPlaces={this.searchPlaces}
                   clearSearch={this.clearSearch}
                   showClear={
-                    places.length > 0 && window.location.path === '/weather-app'
+                    places.length > 0 &&
+                    window.location.pathname === '/weather-app'
                       ? true
                       : false
                   }
