@@ -153,7 +153,7 @@ export default class App extends Component {
   //Switch units
   switcher = units => {
     const { place, places } = this.state;
-    if (place !== null) {
+    if (place !== null && window.location.pathname !== '/weather-app') {
       this.setState(
         () => {
           return { units };
@@ -161,7 +161,10 @@ export default class App extends Component {
         () => this.getForecast(place.name, place.lat, place.lon)
       );
       this.clearSearch();
-    } else if (place === null && places.length > 0) {
+    } else if (
+      (place === null && places.length > 0) ||
+      (place !== null && window.location.pathname === '/weather-app')
+    ) {
       this.setState(
         () => {
           return { units };
