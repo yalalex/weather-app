@@ -121,7 +121,7 @@ export default class Forecast extends Component {
                 exact
                 path='/weather-app/current/:name'
                 render={props => (
-                  <div className='grid-3'>
+                  <div className='grid-4'>
                     {forecastToday.map(period => (
                       <PeriodItem
                         key={period.dt}
