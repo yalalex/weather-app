@@ -8,7 +8,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
       <h1>Weather app</h1>
       <ul>
         <li>
-          <Link to='/weather-app'>{lang === 'en' ? 'Home' : 'Домой'}</Link>
+          <Link to='/weather-app'>{lang === 'en' ? 'Search' : 'Поиск'}</Link>
         </li>
         <li>
           <Link to='/weather-app/about'>
@@ -17,12 +17,12 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
         </li>
         <li>
           <Link to='#' onClick={switchUnits}>
-            {units === 'metric' ? '→°F' : '→°C'}
+            {units === 'metric' ? '°F' : '°C'}
           </Link>
         </li>
         <li>
           <Link to='#' onClick={switchLang}>
-            {lang === 'en' ? '→RU' : '→EN'}
+            {lang === 'en' ? 'RU' : 'EN'}
           </Link>
         </li>
       </ul>
