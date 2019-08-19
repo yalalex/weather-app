@@ -42,10 +42,11 @@ export default class App extends Component {
               ? 'No cities found. Check the spelling and try again'
               : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
           this.setAlert(alert, 'dark');
-          this.setState({ loading: true });
+          this.setState({ loading: false });
         } else {
-          this.setState({ places: res.body.data, loading: false });
+          this.setState({ places: res.body.data });
           this.getPlaceWeather();
+          this.setState({ loading: false });
         }
         console.log(this.state.places);
       })
