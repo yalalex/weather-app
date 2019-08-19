@@ -220,7 +220,7 @@ export default class App extends Component {
                 exact
                 path='/weather-app'
                 render={props => (
-                  <div className='grid-5'>
+                  <div className='grid-4'>
                     {places.map(place => (
                       <PlaceItem
                         key={place.id}
