@@ -19,7 +19,7 @@ const PeriodItem = ({ period, offset, lang }) => {
           <img
             alt={weather[0].description}
             src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
-            width='100'
+            style={{ width: '100px' }}
           />
         </li>
         <li>

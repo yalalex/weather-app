@@ -20,7 +20,7 @@ const DayItem = ({ day, lang }) => {
             src={`https://www.weatherbit.io/static/img/icons/${
               weather.icon
             }.png`}
-            width='70'
+            style={{ width: '70px' }}
           />
         </li>
         <li>

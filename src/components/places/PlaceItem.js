@@ -19,7 +19,7 @@ const PlaceItem = ({ place, getForecast, lang }) => {
       <img
         alt={sky}
         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-        width='100'
+        style={{ width: '100px' }}
       />
       <h3>
         {city}, {regionCode}

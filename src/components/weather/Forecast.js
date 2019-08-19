@@ -76,7 +76,7 @@ export default class Forecast extends Component {
                   <img
                     alt={sky}
                     src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-                    width='150'
+                    style={{ width: '150px' }}
                   />
                 </div>
                 <div style={{ margin: 'auto 0' }}>
