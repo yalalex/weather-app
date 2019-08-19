@@ -36,8 +36,17 @@ export default class App extends Component {
       .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
       .set('Accept', 'application/json')
       .then(res => {
-        this.setState({ places: res.body.data, loading: false });
-        this.getPlaceWeather();
+        if (res.body.data.length === 0) {
+          const alert =
+            this.state.lang === 'en'
+              ? 'No cities found. Check the spelling and try again'
+              : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
+          this.setAlert(alert, 'dark');
+          this.setState({ loading: true });
+        } else {
+          this.setState({ places: res.body.data, loading: false });
+          this.getPlaceWeather();
+        }
         console.log(this.state.places);
       })
       .catch(err => {

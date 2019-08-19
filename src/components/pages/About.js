@@ -8,10 +8,10 @@ const About = ({ lang }) => {
       <p>
         An application for finding weather in more than 134,000 cities in the
         world.
-        <p>
-          Provides information on current weather, as well as a detailed
-          forecast for the next 30 hours and a forecast for 16 days.
-        </p>
+      </p>
+      <p>
+        Provides information on current weather, as well as a detailed forecast
+        for the next 30 hours and a forecast for 16 days.
       </p>
       <p>
         Made by <a href='https://github.com/yalalex/'>Alex Y</a>.
