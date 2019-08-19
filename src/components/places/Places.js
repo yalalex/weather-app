@@ -8,7 +8,7 @@ const Places = ({ places, getForecast, loading, lang }) => {
     return <Spinner />;
   } else
     return (
-      <div className='grid-4'>
+      <div className='grid-3'>
         {places.map(place => (
           <PlaceItem
             key={place.id}
