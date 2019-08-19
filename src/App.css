@@ -401,8 +401,7 @@ table th {
     grid-template-columns: 1fr;
   }
 
-  .grid-4,
-  .grid-5 {
+  .grid-4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
