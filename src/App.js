@@ -104,7 +104,7 @@ export default class App extends Component {
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
-    const today = resp.data.list.slice(0, 9);
+    const today = resp.data.list.slice(0, 10);
     const { sunrise, sunset } = this.state.current;
     today.map(async period => {
       //Change icons according to local time
@@ -220,7 +220,7 @@ export default class App extends Component {
                 exact
                 path='/weather-app'
                 render={props => (
-                  <div className='grid-3'>
+                  <div className='grid-5'>
                     {places.map(place => (
                       <PlaceItem
                         key={place.id}

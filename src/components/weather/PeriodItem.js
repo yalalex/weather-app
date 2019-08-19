@@ -3,14 +3,14 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
 const PeriodItem = ({ period, offset, lang }) => {
-  const { dt, main, wind, weather } = period,
+  const { dt, main, weather } = period,
     time = dt + offset;
   return (
     <div className='card text-center'>
       <ul>
         <li>
           <h3>
-            <Moment locale={lang} unix format='LT'>
+            <Moment locale={lang} unix format='ddd LT'>
               {time}
             </Moment>
           </h3>
@@ -23,21 +23,21 @@ const PeriodItem = ({ period, offset, lang }) => {
           />
         </li>
         <li>
-          <h2>{main.temp.toFixed()}°</h2>
+          <h1>{main.temp.toFixed()}°</h1>
         </li>
         {/* <li>Precipitation: {rain}%</li> */}
-        <li>
+        {/* <li>
           {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
           {main.humidity}%
         </li>
         <li>
           {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-          {wind.speed.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+          {wind.speed.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
         </li>
         <li>
           {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-          {main.pressure.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
-        </li>
+          {main.pressure.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
+        </li> */}
       </ul>
     </div>
   );

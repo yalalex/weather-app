@@ -33,11 +33,11 @@ export default class Forecast extends Component {
   switchButton = () => {
     const { lang } = this.props,
       { target } = this.state;
-    const button24 = lang === 'en' ? '24-hr forecast' : 'Прогноз на 24 часа',
+    const button30 = lang === 'en' ? '30-hr forecast' : 'Прогноз на 30 часов',
       button16 = lang === 'en' ? '16-day forecast' : 'Прогноз на 16 дней';
     target === '16-day'
       ? this.setState({
-          btn: button24,
+          btn: button30,
           target: 'current'
         })
       : this.setState({
@@ -100,11 +100,11 @@ export default class Forecast extends Component {
                   </li>
                   <li>
                     {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-                    {wind.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+                    {wind.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
                   </li>
                   <li>
                     {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-                    {pressure.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
+                    {pressure.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
                   </li>
                 </ul>
                 <Link
@@ -121,7 +121,7 @@ export default class Forecast extends Component {
                 exact
                 path='/weather-app/current/:name'
                 render={props => (
-                  <div className='grid-4'>
+                  <div className='grid-5'>
                     {forecastToday.map(period => (
                       <PeriodItem
                         key={period.dt}

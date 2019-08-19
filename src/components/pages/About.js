@@ -10,7 +10,7 @@ const About = ({ lang }) => {
         world.
         <p>
           Provides information on current weather, as well as a detailed
-          forecast for the next 24 hours and a forecast for 16 days.
+          forecast for the next 30 hours and a forecast for 16 days.
         </p>
       </p>
       <p>
@@ -23,7 +23,7 @@ const About = ({ lang }) => {
       <p>Приложение для поиска погоды в более чем 134 000 городах мира.</p>
       <p>
         Предоставляет информацию по текущей погоде, а так же подробный прогноз
-        на ближайшие 24 часа и прогноз на 16 дней.
+        на ближайшие 30 часов и прогноз на 16 дней.
       </p>
       <p>
         Сделал <a href='https://github.com/yalalex/'>Alex Y</a>.

@@ -38,11 +38,11 @@ const DayItem = ({ day, lang }) => {
         </li>
         <li>
           {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-          {wind_spd.toFixed(1)} {lang === 'en' ? 'm/s: ' : 'м/с'}
+          {wind_spd.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
         </li>
         <li>
           {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-          {pres.toFixed()} {lang === 'en' ? 'mbar: ' : 'мбар'}
+          {pres.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
         </li>
       </ul>
     </div>
