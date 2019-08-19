@@ -44,9 +44,8 @@ export default class App extends Component {
           this.setAlert(alert, 'dark');
           this.setState({ loading: false });
         } else {
-          this.setState({ places: res.body.data });
+          this.setState({ places: res.body.data, loading: false });
           this.getPlaceWeather();
-          this.setState({ loading: false });
         }
         console.log(this.state.places);
       })
