@@ -407,6 +407,11 @@ table th {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .grid-5 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   /* Text Styles */
   .x-large {
     font-size: 3rem;
