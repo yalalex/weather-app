@@ -4,7 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import Search from './components/places/Search';
 import Forecast from './components/weather/Forecast';
-import PlaceItem from './components/places/PlaceItem';
+import Places from './components/places/Places';
 import About from './components/pages/About';
 import './App.css';
 import request from 'superagent';
@@ -230,16 +230,12 @@ export default class App extends Component {
                 exact
                 path='/weather-app'
                 render={props => (
-                  <div className='grid-4'>
-                    {places.map(place => (
-                      <PlaceItem
-                        key={place.id}
-                        place={place}
-                        getForecast={this.getForecast}
-                        lang={lang}
-                      />
-                    ))}
-                  </div>
+                  <Places
+                    places={places}
+                    getForecast={this.getForecast}
+                    loading={loading}
+                    lang={lang}
+                  />
                 )}
               />
               <Route
