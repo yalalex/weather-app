@@ -75,7 +75,7 @@ export default class Forecast extends Component {
                 <div className='all-center'>
                   <img
                     alt={sky}
-                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
                     style={{ width: '150px' }}
                   />
                 </div>
