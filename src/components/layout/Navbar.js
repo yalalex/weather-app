@@ -33,7 +33,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
         <li>
           <div className='switch'>
             <div className='select'>
-              {lang === 'en' ? 'EN ' : 'RU '}
+              {lang === 'en' ? 'EN' : 'RU'}
               <i className='fa fa-angle-down' aria-hidden='true' />
             </div>
             <ul className='select-drop'>
