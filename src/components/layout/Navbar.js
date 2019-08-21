@@ -24,11 +24,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
               <i className='fa fa-angle-down' />
             </div>
             <ul className='select-drop'>
-              <li>
-                <Link to='#' onClick={switchUnits}>
-                  {units === 'metric' ? '°F' : '°C'}
-                </Link>
-              </li>
+              <li onClick={switchUnits}>{units === 'metric' ? '°F' : '°C'}</li>
             </ul>
           </div>
         </li>
@@ -39,11 +35,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
               <i className='fa fa-angle-down' />
             </div>
             <ul className='select-drop'>
-              <li>
-                <Link to='#' onClick={switchLang}>
-                  {lang === 'en' ? 'RU' : 'EN'}
-                </Link>
-              </li>
+              <li onClick={switchLang}>{lang === 'en' ? 'RU' : 'EN'}</li>
             </ul>
           </div>
         </li>
