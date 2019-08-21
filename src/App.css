@@ -59,8 +59,8 @@ img {
 
 .switch .select-drop {
   position: absolute;
-  top: 20px;
-  left: -1px;
+  top: 18px;
+  left: 15px;
   display: none;
 }
 
