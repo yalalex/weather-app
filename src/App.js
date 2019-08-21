@@ -92,20 +92,21 @@ export default class App extends Component {
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
+    const { timezone, dt, main, wind, weather, sys } = respo.data;
     this.setState({
       current: {
         name,
-        timezone: respo.data.timezone,
-        dt: respo.data.dt,
-        temp: respo.data.main.temp.toFixed(),
-        wind: respo.data.wind.speed,
-        pressure: respo.data.main.pressure,
-        humidity: respo.data.main.humidity,
-        weather: respo.data.weather[0].main,
-        sky: respo.data.weather[0].description,
-        icon: respo.data.weather[0].icon,
-        sunrise: respo.data.sys.sunrise,
-        sunset: respo.data.sys.sunset
+        timezone: timezone,
+        dt: dt,
+        temp: main.temp.toFixed(),
+        wind: wind.speed,
+        pressure: main.pressure,
+        humidity: main.humidity,
+        weather: weather[0].main,
+        sky: weather[0].description,
+        icon: weather[0].icon,
+        sunrise: sys.sunrise,
+        sunset: sys.sunset
       }
     });
     const resp = await axios.get(
