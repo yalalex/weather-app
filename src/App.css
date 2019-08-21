@@ -19,7 +19,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  /* background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%); */
+  background-color: darkgray;
   color: #333;
 }
 
@@ -38,6 +39,37 @@ ul {
 
 img {
   width: 100%;
+}
+
+/* Switcher */
+.switch {
+  display: inline-block;
+  position: relative;
+  width: 55px;
+  cursor: pointer;
+}
+
+.switch .select {
+  padding-left: 10px;
+}
+
+.switch .select i {
+  margin-left: 5px;
+}
+
+.switch .select-drop {
+  position: absolute;
+  top: 20px;
+  left: -1px;
+  display: none;
+}
+
+.switch .select-drop li {
+  list-style-type: none;
+}
+
+.switch:hover .select-drop {
+  display: block;
 }
 
 /* Utilities */

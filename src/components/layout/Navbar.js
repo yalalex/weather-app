@@ -16,14 +16,37 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
           </Link>
         </li>
         <li>
-          <Link to='#' onClick={switchUnits}>
-            {units === 'metric' ? '°F' : '°C'}
-          </Link>
+          <div className='switch'>
+            <div className='select'>
+              {units === 'metric' ? '°C' : '°F'}
+              <i className='fa fa-angle-down' aria-hidden='true' />
+            </div>
+            <ul className='select-drop'>
+              <li>
+                <Link to='#' onClick={switchUnits}>
+                  {units === 'metric' ? '°F' : '°C'}
+                </Link>
+              </li>
+            </ul>
+          </div>
         </li>
         <li>
-          <Link to='#' onClick={switchLang}>
+          <div className='switch'>
+            <div className='select'>
+              {lang === 'en' ? 'EN ' : 'RU '}
+              <i className='fa fa-angle-down' aria-hidden='true' />
+            </div>
+            <ul className='select-drop'>
+              <li>
+                <Link to='#' onClick={switchLang}>
+                  {lang === 'en' ? 'RU' : 'EN'}
+                </Link>
+              </li>
+            </ul>
+          </div>
+          {/* <Link to='#' onClick={switchLang}>
             {lang === 'en' ? 'RU' : 'EN'}
-          </Link>
+          </Link> */}
         </li>
       </ul>
     </nav>
