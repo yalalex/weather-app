@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 const Navbar = ({ units, lang, switchLang, switchUnits }) => {
   return (
     <nav className='navbar bg-primary'>
-      <h1>Weather app</h1>
+      <h1>
+        <i class='fas fa-cloud-sun-rain' /> Weather app
+      </h1>
       <ul>
         <li>
           <Link to='/weather-app'>{lang === 'en' ? 'Search' : 'Поиск'}</Link>
