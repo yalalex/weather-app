@@ -19,8 +19,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  /* background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%); */
-  background-color: #8da5c9;
+  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  /* background-color: #8da5c9; */
   color: #333;
 }
 
@@ -60,7 +60,7 @@ img {
 .switch .select-drop {
   position: absolute;
   top: 18px;
-  left: 15px;
+  left: -1px;
   display: none;
 }
 
