@@ -26,6 +26,13 @@ export default class Forecast extends Component {
       : this.setState({ btn: 'Прогноз на 16 дней', target: '16-day' });
   }
 
+  componentDidUpdate(prevProps) {
+    prevProps.lang !== this.props.lang && this.switchButton();
+    // if (prevProps.lang !== this.props.lang || ) {
+    //   this.switchButton();
+    // }
+  }
+
   switchTarget = target => {
     target === '16-day'
       ? this.setState(

@@ -46,9 +46,6 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
               </li>
             </ul>
           </div>
-          {/* <Link to='#' onClick={switchLang}>
-            {lang === 'en' ? 'RU' : 'EN'}
-          </Link> */}
         </li>
       </ul>
     </nav>
