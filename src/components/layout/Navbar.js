@@ -6,7 +6,7 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
   return (
     <nav className='navbar bg-primary'>
       <h1>
-        <i class='fas fa-cloud-sun-rain' /> Weather app
+        <i className='fas fa-cloud-sun-rain' /> Weather app
       </h1>
       <ul>
         <li>
