@@ -121,7 +121,9 @@ export default class App extends Component {
     const today = resp.data.list.slice(0, 10);
     today.map(async period => {
       //Change icons according to local time
-      if (sunset < period.dt && period.dt < sunrise + 86400) {
+      if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
+        period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
+      } else if (sunset < period.dt && period.dt < sunrise + 86400) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
       } else if (sunrise < period.dt && period.dt < sunset) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
