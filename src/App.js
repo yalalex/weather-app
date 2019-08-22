@@ -65,10 +65,11 @@ export default class App extends Component {
           process.env.REACT_APP_OPENWEATHER_KEY
         }`
       );
+      let { main, weather } = res.data;
       Object.assign(place, {
-        temp: res.data.main.temp.toFixed(),
-        sky: res.data.weather[0].description,
-        icon: res.data.weather[0].icon
+        temp: main.temp.toFixed(),
+        sky: weather[0].description,
+        icon: weather[0].icon
       });
       this.setState({ places: places1 });
     });
@@ -83,39 +84,41 @@ export default class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 3000);
   };
 
-  //Get current weather and 24-hr/16-day forecast
-  getForecast = async (name, lat, lon) => {
-    const { units } = this.state;
+  //Get current weather and 30-hr/16-day forecast
+  getForecast = async place => {
+    const { units } = this.state,
+      { city, latitude, longitude } = place;
     this.setState({ loading: true });
     const respo = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
-    const { timezone, dt, main, wind, weather, sys } = respo.data;
+    const { timezone, dt, main, wind, weather, sys } = respo.data,
+      { temp, pressure, humidity } = main,
+      { sunrise, sunset } = sys;
     this.setState({
       current: {
-        name,
-        timezone: timezone,
-        dt: dt,
-        temp: main.temp.toFixed(),
+        name: city,
+        timezone,
+        dt,
+        temp: temp.toFixed(),
         wind: wind.speed,
-        pressure: main.pressure,
-        humidity: main.humidity,
+        pressure,
+        humidity,
         weather: weather[0].main,
         sky: weather[0].description,
         icon: weather[0].icon,
-        sunrise: sys.sunrise,
-        sunset: sys.sunset
+        sunrise,
+        sunset
       }
     });
     const resp = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
       }`
     );
     const today = resp.data.list.slice(0, 10);
-    const { sunrise, sunset } = this.state.current;
     today.map(async period => {
       //Change icons according to local time
       if (sunset < period.dt && period.dt < sunrise + 86400) {
@@ -131,14 +134,14 @@ export default class App extends Component {
     });
     const un = units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
-      `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&units=${un}&key=${
+      `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${
         process.env.REACT_APP_WEATHERBIT_KEY
       }`
     );
     this.setState({
       forecast16: res.data.data,
       loading: false,
-      place: { name, lat, lon }
+      place: { city, latitude, longitude }
     });
     console.log(this.state.forecastToday);
     console.log(this.state.forecast16);
@@ -168,7 +171,7 @@ export default class App extends Component {
         () => {
           return { units };
         },
-        () => this.getForecast(place.name, place.lat, place.lon)
+        () => this.getForecast(place)
       );
       this.clearSearch();
     } else if (

@@ -3,16 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const PlaceItem = ({ place, getForecast, lang }) => {
-  const {
-    city,
-    regionCode,
-    country,
-    latitude,
-    longitude,
-    temp,
-    sky,
-    icon
-  } = place;
+  const { city, regionCode, country, temp, sky, icon } = place;
   return (
     <div className='card text-center'>
       <h1>{temp}°</h1>
@@ -29,7 +20,7 @@ const PlaceItem = ({ place, getForecast, lang }) => {
         <Link
           to={`/weather-app/current/${city}`}
           className='btn btn-dark btn-sm my-1'
-          onClick={() => getForecast(city, latitude, longitude)}
+          onClick={() => getForecast(place)}
         >
           {lang === 'en' ? 'Select' : 'Выбрать'}
         </Link>
