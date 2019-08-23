@@ -45,34 +45,12 @@ export default class App extends Component {
           this.setState({ loading: false });
         } else {
           this.setState({ places: res.body.data, loading: false });
-          this.getPlaceWeather();
         }
         console.log(this.state.places);
       })
       .catch(err => {
         console.log(err);
       });
-  };
-
-  //Get weather for search request
-  getPlaceWeather = () => {
-    const { units, places } = this.state;
-    const places1 = [...places];
-    places1.map(async place => {
-      let { latitude, longitude } = place;
-      let res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
-          process.env.REACT_APP_OPENWEATHER_KEY
-        }`
-      );
-      let { main, weather } = res.data;
-      Object.assign(place, {
-        temp: main.temp.toFixed(),
-        sky: weather[0].description,
-        icon: weather[0].icon
-      });
-      this.setState({ places: places1 });
-    });
   };
 
   //Clear search
@@ -84,9 +62,20 @@ export default class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 3000);
   };
 
+  //Select place in search and get weather for it
+  selectPlace = place => {
+    const { city, latitude, longitude } = place;
+    this.setState(
+      () => {
+        return { place: { city, latitude, longitude } };
+      },
+      () => this.getWeather()
+    );
+  };
+
   //Get current weather and 30-hr/16-day forecast
-  getForecast = async place => {
-    const { units } = this.state,
+  getWeather = async () => {
+    const { units, place } = this.state,
       { city, latitude, longitude } = place;
     this.setState({ loading: true });
     const respo = await axios.get(
@@ -142,8 +131,7 @@ export default class App extends Component {
     );
     this.setState({
       forecast16: res.data.data,
-      loading: false,
-      place: { city, latitude, longitude }
+      loading: false
     });
     console.log(this.state.forecastToday);
     console.log(this.state.forecast16);
@@ -158,41 +146,16 @@ export default class App extends Component {
       : this.setState({ lang: 'en' });
   };
 
-  // Switch units init
+  // Switch units
   switchUnits = () => {
     this.state.units === 'metric'
-      ? this.switcher('imperial')
-      : this.switcher('metric');
-  };
-
-  //Switch units
-  switcher = units => {
-    const { place, places } = this.state;
-    if (place !== null && window.location.pathname !== '/weather-app') {
-      this.setState(
-        () => {
-          return { units };
-        },
-        () => this.getForecast(place)
-      );
-      this.clearSearch();
-    } else if (
-      (place === null && places.length > 0) ||
-      (place !== null && window.location.pathname === '/weather-app')
-    ) {
-      this.setState(
-        () => {
-          return { units };
-        },
-        () => this.getPlaceWeather()
-      );
-    } else this.setState({ units });
+      ? this.setState({ units: 'imperial' })
+      : this.setState({ units: 'metric' });
   };
 
   render() {
     const {
       places,
-      // place,
       loading,
       alert,
       units,
@@ -206,8 +169,8 @@ export default class App extends Component {
         <div className='App'>
           <Navbar
             switchUnits={this.switchUnits}
-            units={units}
             switchLang={this.switchLang}
+            units={units}
             lang={lang}
           />
           <div className='container'>
@@ -236,8 +199,9 @@ export default class App extends Component {
                 path='/weather-app'
                 render={props => (
                   <Places
+                    selectPlace={this.selectPlace}
+                    units={units}
                     places={places}
-                    getForecast={this.getForecast}
                     loading={loading}
                     lang={lang}
                   />
@@ -249,11 +213,13 @@ export default class App extends Component {
                 render={props => (
                   <Forecast
                     {...props}
+                    getWeather={this.getWeather}
                     current={current}
                     forecastToday={forecastToday}
                     forecast16={forecast16}
                     loading={loading}
                     lang={lang}
+                    units={units}
                   />
                 )}
               />

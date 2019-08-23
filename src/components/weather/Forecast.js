@@ -17,7 +17,9 @@ export default class Forecast extends Component {
     forecast16: PropTypes.array.isRequired,
     current: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    lang: PropTypes.string.isRequired
+    lang: PropTypes.string.isRequired,
+    units: PropTypes.string.isRequired,
+    getWeather: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -28,9 +30,7 @@ export default class Forecast extends Component {
 
   componentDidUpdate(prevProps) {
     prevProps.lang !== this.props.lang && this.switchButton();
-    // if (prevProps.lang !== this.props.lang || ) {
-    //   this.switchButton();
-    // }
+    prevProps.units !== this.props.units && this.props.getWeather();
   }
 
   switchTarget = target => {
