@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
@@ -10,43 +10,46 @@ import './App.css';
 import request from 'superagent';
 import axios from 'axios';
 
-export default class App extends Component {
-  state = {
-    units: 'metric',
-    lang: 'en',
-    loading: false,
-    alert: null,
-    places: [],
-    place: null,
-    current: {},
-    forecastToday: [],
-    forecast16: []
-  };
+const App = () => {
+  const [units, setUnits] = useState('metric');
+  const [lang, setLang] = useState('en');
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const [places, setPlaces] = useState([]);
+  const [place, setPlace] = useState(null);
+  const [current, setCurrent] = useState({});
+  const [forecastToday, setForecastToday] = useState([]);
+  const [forecast16, setForecast16] = useState([]);
+
+  // useEffect(() => {
+  //   getWeather();
+  // }, place);
 
   //Search places to get weather for
-  searchPlaces = async text => {
-    this.setState({ loading: true });
+  const searchPlaces = async text => {
+    setLoading(true);
     request
       .get('https://wft-geo-db.p.rapidapi.com/v1/geo/cities')
       .query({ limit: '10' })
       .query({ namePrefix: text })
       .query({ sort: '-population' })
-      .query({ languageCode: this.state.lang })
+      .query({ languageCode: lang })
       .set('x-rapidapi-host', 'wft-geo-db.p.rapidapi.com')
       .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
       .set('Accept', 'application/json')
       .then(res => {
         if (res.body.data.length === 0) {
           const alert =
-            this.state.lang === 'en'
+            lang === 'en'
               ? 'No cities found. Check the spelling and try again'
               : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
-          this.setAlert(alert, 'dark');
-          this.setState({ loading: false });
+          showAlert(alert, 'dark');
+          setLoading(false);
         } else {
-          this.setState({ places: res.body.data, loading: false });
+          setPlaces(res.body.data);
+          setLoading(false);
         }
-        console.log(this.state.places);
+        // console.log(places);
       })
       .catch(err => {
         console.log(err);
@@ -54,30 +57,33 @@ export default class App extends Component {
   };
 
   //Clear search
-  clearSearch = () => this.setState({ places: [], loading: false });
+  const clearSearch = () => {
+    setPlaces([]);
+    setLoading(false);
+  };
 
   //Set alert
-  setAlert = (msg, type) => {
-    this.setState({ alert: { msg, type } });
-    setTimeout(() => this.setState({ alert: null }), 3000);
+  const showAlert = (msg, type) => {
+    setAlert({ msg, type });
+    setTimeout(() => setAlert(null), 3000);
   };
 
   //Select place in search and get weather for it
-  selectPlace = place => {
+  const selectPlace = async place => {
     const { city, latitude, longitude } = place;
-    this.setState(
+    setPlace(
       () => {
-        return { place: { city, latitude, longitude } };
+        return { city, latitude, longitude };
       },
-      () => this.getWeather()
+      () => getWeather()
     );
   };
 
   //Get current weather and 30-hr/16-day forecast
-  getWeather = async () => {
-    const { units, place } = this.state,
-      { city, latitude, longitude } = place;
-    this.setState({ loading: true });
+  const getWeather = async () => {
+    setLoading(true);
+    const { city, latitude, longitude } = place;
+    //Get current weather
     const respo = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
@@ -86,22 +92,21 @@ export default class App extends Component {
     const { timezone, dt, main, wind, weather, sys } = respo.data,
       { temp, pressure, humidity } = main,
       { sunrise, sunset } = sys;
-    this.setState({
-      current: {
-        name: city,
-        timezone,
-        dt,
-        temp: temp.toFixed(),
-        wind: wind.speed,
-        pressure,
-        humidity,
-        weather: weather[0].main,
-        sky: weather[0].description,
-        icon: weather[0].icon,
-        sunrise,
-        sunset
-      }
+    setCurrent({
+      name: city,
+      timezone,
+      dt,
+      temp: temp.toFixed(),
+      wind: wind.speed,
+      pressure,
+      humidity,
+      weather: weather[0].main,
+      sky: weather[0].description,
+      icon: weather[0].icon,
+      sunrise,
+      sunset
     });
+    //Get forecast for 30 hours
     const resp = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
         process.env.REACT_APP_OPENWEATHER_KEY
@@ -120,118 +125,101 @@ export default class App extends Component {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
       }
     });
-    this.setState({
-      forecastToday: today
-    });
+    setForecastToday(today);
+    //Get forecast for 16 days
     const un = units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${
         process.env.REACT_APP_WEATHERBIT_KEY
       }`
     );
-    this.setState({
-      forecast16: res.data.data,
-      loading: false
-    });
-    console.log(this.state.forecastToday);
-    console.log(this.state.forecast16);
-    console.log(this.state.current);
-    console.log(this.state.place);
+    setForecast16(res.data.data);
+    setLoading(false);
+    // console.log(forecastToday);
+    // console.log(forecast16);
+    // console.log(current);
+    // console.log(place);
   };
 
   //Switch language
-  switchLang = () => {
-    this.state.lang === 'en'
-      ? this.setState({ lang: 'ru' })
-      : this.setState({ lang: 'en' });
+  const switchLang = () => {
+    lang === 'en' ? setLang('ru') : setLang('en');
   };
 
   // Switch units
-  switchUnits = () => {
-    this.state.units === 'metric'
-      ? this.setState({ units: 'imperial' })
-      : this.setState({ units: 'metric' });
+  const switchUnits = () => {
+    units === 'metric' ? setUnits('imperial') : setUnits('metric');
   };
 
-  render() {
-    const {
-      places,
-      loading,
-      alert,
-      units,
-      lang,
-      current,
-      forecastToday,
-      forecast16
-    } = this.state;
-    return (
-      <Router>
-        <div className='App'>
-          <Navbar
-            switchUnits={this.switchUnits}
-            switchLang={this.switchLang}
-            units={units}
-            lang={lang}
+  return (
+    <Router>
+      <div className='App'>
+        <Navbar
+          switchUnits={switchUnits}
+          switchLang={switchLang}
+          units={units}
+          lang={lang}
+        />
+        <div className='container'>
+          <Alert alert={alert} lang={lang} />
+          <Route
+            path='/weather-app'
+            render={props => (
+              <Search
+                {...props}
+                searchPlaces={searchPlaces}
+                clearSearch={clearSearch}
+                showClear={
+                  places.length > 0 &&
+                  window.location.pathname === '/weather-app'
+                    ? true
+                    : false
+                }
+                setAlert={showAlert}
+                lang={lang}
+              />
+            )}
           />
-          <div className='container'>
-            <Alert alert={alert} lang={lang} />
+          <Switch>
             <Route
+              exact
               path='/weather-app'
               render={props => (
-                <Search
-                  {...props}
-                  searchPlaces={this.searchPlaces}
-                  clearSearch={this.clearSearch}
-                  showClear={
-                    places.length > 0 &&
-                    window.location.pathname === '/weather-app'
-                      ? true
-                      : false
-                  }
-                  setAlert={this.setAlert}
+                <Places
+                  selectPlace={selectPlace}
+                  units={units}
+                  places={places}
+                  loading={loading}
                   lang={lang}
                 />
               )}
             />
-            <Switch>
-              <Route
-                exact
-                path='/weather-app'
-                render={props => (
-                  <Places
-                    selectPlace={this.selectPlace}
-                    units={units}
-                    places={places}
-                    loading={loading}
-                    lang={lang}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path='/weather-app/current/:name'
-                render={props => (
-                  <Forecast
-                    {...props}
-                    getWeather={this.getWeather}
-                    current={current}
-                    forecastToday={forecastToday}
-                    forecast16={forecast16}
-                    loading={loading}
-                    lang={lang}
-                    units={units}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path='/weather-app/about'
-                render={props => <About lang={lang} />}
-              />
-            </Switch>
-          </div>
+            <Route
+              exact
+              path='/weather-app/current/:name'
+              render={props => (
+                <Forecast
+                  {...props}
+                  getWeather={getWeather}
+                  current={current}
+                  forecastToday={forecastToday}
+                  forecast16={forecast16}
+                  loading={loading}
+                  lang={lang}
+                  units={units}
+                />
+              )}
+            />
+            <Route
+              exact
+              path='/weather-app/about'
+              render={props => <About lang={lang} />}
+            />
+          </Switch>
         </div>
-      </Router>
-    );
-  }
-}
+      </div>
+    </Router>
+  );
+};
+
+export default App;

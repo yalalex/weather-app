@@ -1,66 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Search extends Component {
-  state = {
-    text: ''
-  };
+const Search = ({
+  searchPlaces,
+  clearSearch,
+  setAlert,
+  showClear,
+  lang,
+  history
+}) => {
+  const [text, setText] = useState('');
 
-  static propTypes = {
-    searchPlaces: PropTypes.func.isRequired,
-    clearSearch: PropTypes.func.isRequired,
-    setAlert: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    lang: PropTypes.string.isRequired
-  };
-
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    if (this.state.text === '') {
+    if (text === '') {
       const alert =
-        this.props.lang === 'en'
+        lang === 'en'
           ? 'Please enter something'
           : 'Пожалуйста, введите что-нибудь';
-      this.props.setAlert(alert, 'dark');
+      setAlert(alert, 'dark');
     } else {
-      this.props.searchPlaces(this.state.text);
-      this.setState({ text: '' });
-      this.props.history.push('/weather-app');
+      searchPlaces(text);
+      setText('');
+      history.push('/weather-app');
     }
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  const onChange = e => setText(e.target.value);
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onSubmit} className='form'>
-          <input
-            type='text'
-            name='text'
-            value={this.state.text}
-            placeholder={
-              this.props.lang === 'en'
-                ? 'Enter City Name...'
-                : 'Введите название города на русском языке...'
-            }
-            onChange={this.onChange}
-          />
-          <input
-            type='submit'
-            value={this.props.lang === 'en' ? 'Search' : 'Поиск'}
-            className='btn btn-dark btn-block'
-          />
-        </form>
-        {this.props.showClear && (
-          <button
-            className='btn btn-grey btn-block'
-            onClick={this.props.clearSearch}
-          >
-            {this.props.lang === 'en' ? 'Clear' : 'Очистить'}
-          </button>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={onSubmit} className='form'>
+        <input
+          type='text'
+          name='text'
+          value={text}
+          placeholder={
+            lang === 'en'
+              ? 'Enter City Name...'
+              : 'Введите название города на русском языке...'
+          }
+          onChange={onChange}
+        />
+        <input
+          type='submit'
+          value={lang === 'en' ? 'Search' : 'Поиск'}
+          className='btn btn-dark btn-block'
+        />
+      </form>
+      {showClear && (
+        <button className='btn btn-grey btn-block' onClick={clearSearch}>
+          {lang === 'en' ? 'Clear' : 'Очистить'}
+        </button>
+      )}
+    </div>
+  );
+};
+
+Search.propTypes = {
+  searchPlaces: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+  lang: PropTypes.string.isRequired
+};
+
+export default Search;
