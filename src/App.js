@@ -21,10 +21,6 @@ const App = () => {
   const [forecastToday, setForecastToday] = useState([]);
   const [forecast16, setForecast16] = useState([]);
 
-  // useEffect(() => {
-  //   getWeather();
-  // }, place);
-
   //Search places to get weather for
   const searchPlaces = async text => {
     setLoading(true);
@@ -71,12 +67,7 @@ const App = () => {
   //Select place in search and get weather for it
   const selectPlace = async place => {
     const { city, latitude, longitude } = place;
-    setPlace(
-      () => {
-        return { city, latitude, longitude };
-      },
-      () => getWeather()
-    );
+    setPlace({ city, latitude, longitude });
   };
 
   //Get current weather and 30-hr/16-day forecast

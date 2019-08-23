@@ -26,14 +26,17 @@ const Forecast = ({
       setBtn('Прогноз на 16 дней');
       setTarget('16-day');
     }
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     switchButton();
+    //eslint-disable-next-line
   }, [lang, target]);
 
   useEffect(() => {
     getWeather();
+    //eslint-disable-next-line
   }, [units]);
 
   const switchTarget = target => {

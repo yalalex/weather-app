@@ -10,6 +10,7 @@ const PlaceItem = ({ selectPlace, place, lang, units }) => {
 
   useEffect(() => {
     getPlaceWeather();
+    //eslint-disable-next-line
   }, [units]);
 
   const getPlaceWeather = async () => {
