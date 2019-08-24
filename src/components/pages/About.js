@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, Fragment } from 'react';
+import WeatherContext from '../../context/weather/weatherContext';
 
-const About = ({ lang }) => {
-  return lang === 'en' ? (
+const About = () => {
+  const weatherContext = useContext(WeatherContext);
+  return weatherContext.lang === 'en' ? (
     <Fragment>
       <h2>About this app</h2>
       <p>
@@ -30,10 +31,6 @@ const About = ({ lang }) => {
       </p>
     </Fragment>
   );
-};
-
-About.propTypes = {
-  lang: PropTypes.string.isRequired
 };
 
 export default About;

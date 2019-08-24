@@ -1,20 +1,24 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
 import PeriodItem from './PeriodItem';
 import DayItem from './DayItem';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import WeatherContext from '../../context/weather/weatherContext';
 import Moment from 'react-moment';
 
-const Forecast = ({
-  current,
-  forecastToday,
-  forecast16,
-  getWeather,
-  loading,
-  units,
-  lang
-}) => {
+const Forecast = () => {
+  const weatherContext = useContext(WeatherContext);
+
+  const {
+    current,
+    forecastToday,
+    forecast16,
+    getWeather,
+    loading,
+    units,
+    lang
+  } = weatherContext;
+
   const [btn, setBtn] = useState('');
   const [target, setTarget] = useState('');
 
@@ -156,16 +160,6 @@ const Forecast = ({
         </Fragment>
       </Router>
     );
-};
-
-Forecast.propTypes = {
-  forecastToday: PropTypes.array.isRequired,
-  forecast16: PropTypes.array.isRequired,
-  current: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  lang: PropTypes.string.isRequired,
-  units: PropTypes.string.isRequired,
-  getWeather: PropTypes.func.isRequired
 };
 
 export default Forecast;

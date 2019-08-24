@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import WeatherContext from '../../context/weather/weatherContext';
 
-const Navbar = ({ units, lang, switchLang, switchUnits }) => {
+const Navbar = () => {
+  const weatherContext = useContext(WeatherContext);
+  const { units, lang, switchLang, switchUnits } = weatherContext;
   return (
     <nav className='navbar bg-primary'>
       <h1>
@@ -42,12 +44,6 @@ const Navbar = ({ units, lang, switchLang, switchUnits }) => {
       </ul>
     </nav>
   );
-};
-
-Navbar.propTypes = {
-  units: PropTypes.string.isRequired,
-  switchUnits: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired
 };
 
 export default Navbar;

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PlaceItem from './PlaceItem';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
+import WeatherContext from '../../context/weather/weatherContext';
 
-const Places = ({ places, selectPlace, loading, lang, units }) => {
+const Places = () => {
+  const weatherContext = useContext(WeatherContext);
+
+  const { places, selectPlace, loading, lang, units } = weatherContext;
   if (loading) {
     return <Spinner />;
   } else
@@ -20,14 +23,6 @@ const Places = ({ places, selectPlace, loading, lang, units }) => {
         ))}
       </div>
     );
-};
-
-Places.propTypes = {
-  places: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  lang: PropTypes.string.isRequired,
-  units: PropTypes.string.isRequired,
-  selectPlace: PropTypes.func.isRequired
 };
 
 export default Places;

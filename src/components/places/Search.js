@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
+// import PropTypes from 'prop-types';
+import WeatherContext from '../../context/weather/weatherContext';
 
-const Search = ({
-  searchPlaces,
-  clearSearch,
-  setAlert,
-  showClear,
-  lang,
-  history
-}) => {
+const Search = ({ history }) => {
+  const weatherContext = useContext(WeatherContext);
+
+  const { searchPlaces, clearSearch, setAlert, lang, places } = weatherContext;
+
   const [text, setText] = useState('');
 
   const onSubmit = e => {
@@ -48,21 +46,13 @@ const Search = ({
           className='btn btn-dark btn-block'
         />
       </form>
-      {showClear && (
+      {places.length > 0 && window.location.pathname === '/weather-app' && (
         <button className='btn btn-grey btn-block' onClick={clearSearch}>
           {lang === 'en' ? 'Clear' : 'Очистить'}
         </button>
       )}
     </div>
   );
-};
-
-Search.propTypes = {
-  searchPlaces: PropTypes.func.isRequired,
-  clearSearch: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
-  lang: PropTypes.string.isRequired
 };
 
 export default Search;
