@@ -51,8 +51,6 @@ const WeatherState = props => {
               ? 'No cities found. Check the spelling and try again'
               : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
           setAlert(alert, 'dark');
-          // dispatch({ type: SET_ALERT, payload: { msg: alert, type: 'dark' } });
-          // setTimeout(() => dispatch({ type: REMOVE_ALERT }), 3000);
         } else {
           dispatch({ type: SEARCH_PLACES, payload: res.body.data });
         }

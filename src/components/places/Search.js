@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect, useContext } from 'react';
 import WeatherContext from '../../context/weather/weatherContext';
 
 const Search = ({ history }) => {
@@ -8,6 +7,11 @@ const Search = ({ history }) => {
   const { searchPlaces, clearSearch, setAlert, lang, places } = weatherContext;
 
   const [text, setText] = useState('');
+
+  useEffect(() => {
+    history.push('/weather-app');
+    //eslint-disable-next-line
+  }, [places]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -20,7 +24,6 @@ const Search = ({ history }) => {
     } else {
       searchPlaces(text);
       setText('');
-      history.push('/weather-app');
     }
   };
 
