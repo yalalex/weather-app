@@ -20,7 +20,6 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
-  /* background-color: #8da5c9; */
   color: #333;
 }
 
@@ -137,6 +136,13 @@ img {
   text-align: center;
 }
 
+/* Cards */
+.card {
+  padding: 1rem;
+  margin: 0.7rem 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .flex {
   display: flex;
   flex-flow: wrap;
@@ -153,13 +159,6 @@ img {
   border-bottom-style: dotted;
   margin: 1rem;
   width: 135px;
-}
-
-/* Cards */
-.card {
-  padding: 1rem;
-  margin: 0.7rem 0;
-  background: rgba(0, 0, 0, 0.1);
 }
 
 /* List */
@@ -246,10 +245,6 @@ img {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;
-}
-
-.grid-1 {
-  grid-template-columns: 1fr;
 }
 
 .btn {
@@ -471,7 +466,6 @@ table th {
 
   .card {
     padding: 1rem;
-    /* border: #ccc 1px dotted; */
     margin: 0.7rem 0;
     text-align: center;
   }
