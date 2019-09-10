@@ -6,20 +6,14 @@ import WeatherContext from '../../context/weather/weatherContext';
 const Places = () => {
   const weatherContext = useContext(WeatherContext);
 
-  const { places, selectPlace, loading, lang, units } = weatherContext;
+  const { places, loading } = weatherContext;
   if (loading) {
     return <Spinner />;
   } else
     return (
-      <div className='grid-3'>
+      <div className='grid-4'>
         {places.map(place => (
-          <PlaceItem
-            key={place.id}
-            place={place}
-            selectPlace={selectPlace}
-            units={units}
-            lang={lang}
-          />
+          <PlaceItem key={place.id} place={place} />
         ))}
       </div>
     );

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import WeatherContext from '../../context/weather/weatherContext';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-const PlaceItem = ({ selectPlace, place, lang, units }) => {
+const PlaceItem = ({ place }) => {
+  const weatherContext = useContext(WeatherContext);
+  const { lang, units, selectPlace } = weatherContext;
+
   const [temp, setTemp] = useState('');
   const [sky, setSky] = useState('');
   const [icon, setIcon] = useState('');
