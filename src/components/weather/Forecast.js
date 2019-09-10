@@ -83,7 +83,7 @@ const Forecast = () => {
       <Router>
         <Fragment>
           <div className='card grid-2'>
-            <div className='card grid-2' style={{ padding: '0' }}>
+            <div className='card grid-2'>
               <div className='all-center'>
                 <img
                   alt={sky}
@@ -101,7 +101,7 @@ const Forecast = () => {
                 </h3>
               </div>
             </div>
-            <div style={{ padding: '0.7rem 0' }}>
+            <div style={{ margin: 'auto 0' }}>
               <ul>
                 <li>
                   <h3>{lang === 'en' ? weather : 'Текущие условия:'}</h3>
