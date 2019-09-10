@@ -11,7 +11,7 @@ const Places = () => {
     return <Spinner />;
   } else
     return (
-      <div className='grid-3'>
+      <div className='grid-4'>
         {places.map(place => (
           <PlaceItem key={place.id} place={place} />
         ))}

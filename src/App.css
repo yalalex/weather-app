@@ -462,6 +462,13 @@ table th {
     display: none;
   }
 
+  .container {
+    max-width: 1080px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 0.7rem;
+  }
+
   .card {
     padding: 1rem;
     /* border: #ccc 1px dotted; */
