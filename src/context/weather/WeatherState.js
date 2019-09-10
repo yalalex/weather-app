@@ -102,7 +102,7 @@ const WeatherState = props => {
     const resp = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
-    const today = resp.data.list.slice(0, 10);
+    const today = resp.data.list.slice(0, 16);
     today.map(async period => {
       //Change icons according to local time
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {

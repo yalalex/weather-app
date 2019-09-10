@@ -74,7 +74,7 @@ img {
 
 /* Utilities */
 .container {
-  max-width: 1100px;
+  max-width: 1080px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
@@ -135,6 +135,24 @@ img {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  text-align: center;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.perioditem {
+  border: whitesmoke 1px;
+  border-bottom-style: dotted;
+  margin: 1rem;
+  width: 135px;
 }
 
 /* Cards */
@@ -228,6 +246,10 @@ img {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;
+}
+
+.grid-1 {
+  grid-template-columns: 1fr;
 }
 
 .btn {
@@ -419,27 +441,30 @@ table th {
 .item-enter {
   opacity: 0;
 }
+
 .item-enter-active {
   opacity: 1;
   transition: opacity 500ms ease-in;
 }
+
 .item-exit {
   opacity: 1;
 }
+
 .item-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
 }
 
 /* Mobile Styles */
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .hide-sm {
     display: none;
   }
 
   .card {
     padding: 1rem;
-    border: #ccc 1px dotted;
+    /* border: #ccc 1px dotted; */
     margin: 0.7rem 0;
     text-align: center;
   }
@@ -453,6 +478,26 @@ table th {
   .grid-5 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .perioditem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: whitesmoke 1px;
+    border-bottom-style: dotted;
+    width: 100%;
+    margin: auto;
+    align-items: center;
   }
 
   /* Text Styles */

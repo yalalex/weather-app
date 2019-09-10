@@ -57,8 +57,8 @@ const Forecast = () => {
         ? setBtn('16-day forecast')
         : setBtn('Прогноз на 16 дней')
       : lang === 'en'
-      ? setBtn('30-hr forecast')
-      : setBtn('Прогноз на 30 часов');
+      ? setBtn('48-hr forecast')
+      : setBtn('Прогноз на 48 часов');
   };
 
   const {
@@ -133,7 +133,7 @@ const Forecast = () => {
               exact
               path='/weather-app/current/:name'
               render={props => (
-                <div className='grid-5'>
+                <div className='flex'>
                   {forecastToday.map(period => (
                     <PeriodItem
                       key={period.dt}
