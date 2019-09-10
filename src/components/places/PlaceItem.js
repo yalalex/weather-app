@@ -16,9 +16,7 @@ const PlaceItem = ({ selectPlace, place, lang, units }) => {
   const getPlaceWeather = async () => {
     const { latitude, longitude } = place;
     const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
-        process.env.REACT_APP_OPENWEATHER_KEY
-      }`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
     const { main, weather } = res.data;
     setTemp(main.temp.toFixed());
