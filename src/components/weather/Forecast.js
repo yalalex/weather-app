@@ -133,7 +133,7 @@ const Forecast = () => {
               exact
               path='/weather-app/current/:name'
               render={props => (
-                <div className='grid-5'>
+                <div className='flex'>
                   {forecastToday.map(period => (
                     <PeriodItem
                       key={period.dt}
