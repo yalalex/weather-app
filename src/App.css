@@ -140,8 +140,8 @@ img {
 /* Cards */
 .card {
   padding: 1rem;
-  border: #ccc 1px dotted;
   margin: 0.7rem 0;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* List */

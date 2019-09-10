@@ -25,19 +25,6 @@ const PeriodItem = ({ period, offset, lang }) => {
         <li>
           <h1>{main.temp.toFixed()}°</h1>
         </li>
-        {/* <li>Precipitation: {rain}%</li> */}
-        {/* <li>
-          {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
-          {main.humidity}%
-        </li>
-        <li>
-          {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-          {wind.speed.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
-        </li>
-        <li>
-          {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-          {main.pressure.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
-        </li> */}
       </ul>
     </div>
   );
