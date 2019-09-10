@@ -68,8 +68,7 @@ const WeatherState = props => {
 
   //Select place in search and get weather for it
   const selectPlace = async place => {
-    const { city, latitude, longitude } = place;
-    dispatch({ type: SELECT_PLACE, payload: { city, latitude, longitude } });
+    dispatch({ type: SELECT_PLACE, payload: place });
   };
 
   //Get current weather and 30-hr/16-day forecast
@@ -79,9 +78,7 @@ const WeatherState = props => {
       { city, latitude, longitude } = state.place;
     //Get current weather
     const respo = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
-        process.env.REACT_APP_OPENWEATHER_KEY
-      }`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
     const { timezone, dt, main, wind, weather, sys } = respo.data,
       { temp, pressure, humidity } = main,
@@ -103,9 +100,7 @@ const WeatherState = props => {
     dispatch({ type: GET_CURRENT_WEATHER, payload: current });
     //Get forecast for 30 hours
     const resp = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${
-        process.env.REACT_APP_OPENWEATHER_KEY
-      }`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
     const today = resp.data.list.slice(0, 10);
     today.map(async period => {
@@ -124,9 +119,7 @@ const WeatherState = props => {
     //Get forecast for 16 days
     const un = units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
-      `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${
-        process.env.REACT_APP_WEATHERBIT_KEY
-      }`
+      `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${process.env.REACT_APP_WEATHERBIT_KEY}`
     );
     dispatch({ type: GET_FORECAST, payload: res.data.data });
   };
