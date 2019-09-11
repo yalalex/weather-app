@@ -15,7 +15,7 @@ const DayItem = ({ day, lang }) => {
         <img
           alt={weather.description}
           src={`https://www.weatherbit.io/static/img/icons/${weather.icon}.png`}
-          style={{ width: '66px' }}
+          style={{ width: '70px' }}
         />
         <h2>
           {max_temp.toFixed()}°/{min_temp.toFixed()}°
