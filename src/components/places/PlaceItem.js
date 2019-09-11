@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const PlaceItem = ({ place }) => {
   const weatherContext = useContext(WeatherContext);
-  const { lang, units, selectPlace } = weatherContext;
+  const { units, selectPlace } = weatherContext;
 
   const [temp, setTemp] = useState('');
   const [sky, setSky] = useState('');
@@ -30,58 +30,27 @@ const PlaceItem = ({ place }) => {
 
   const { city, regionCode, country } = place;
   return (
-    <div className='placeitem'>
-      <h1>{temp}°</h1>
-
-      <img
-        alt={sky}
-        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-        style={{ width: '100px' }}
-      />
-      <div className='all-center'>
-        <h3>
-          {city}, {regionCode}
-        </h3>
-        {window.innerWidth > 640 && <h4>{country}</h4>}
-        <Link
-          to={`/weather-app/current/${city}`}
-          className='btn btn-dark btn-sm my-1'
-          onClick={() => selectPlace(place)}
-        >
-          {lang === 'en' ? 'Select' : 'Выбрать'}
-        </Link>
+    <Link
+      to={`/weather-app/current/${city}`}
+      onClick={() => selectPlace(place)}
+    >
+      <div className='placeitem'>
+        <h1>{temp}°</h1>
+        <img
+          alt={sky}
+          src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+          style={{ width: '100px' }}
+        />
+        <div className='all-center'>
+          <h3>
+            {city}, {regionCode}
+          </h3>
+          <h4>{country}</h4>
+        </div>
       </div>
-      {/* <div>
-        
-      </div> */}
-    </div>
+    </Link>
   );
 };
-
-// const { city, regionCode, country } = place;
-// return (
-//   <Link
-//     to={`/weather-app/current/${city}`}
-//     // className='btn btn-dark btn-sm my-1'
-//     onClick={() => selectPlace(place)}
-//   >
-//     <div className='placeitem'>
-//       <h1>{temp}°</h1>
-//       <img
-//         alt={sky}
-//         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-//         style={{ width: '100px' }}
-//       />
-//       <div className='all-center'>
-//         <h3>
-//           {city}, {regionCode}
-//         </h3>
-//       </div>
-//       {window.innerWidth > 640 && <h4>{country}</h4>}
-//     </div>
-//   </Link>
-// );
-// };
 
 PlaceItem.propTypes = {
   place: PropTypes.object.isRequired

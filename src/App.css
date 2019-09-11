@@ -24,7 +24,7 @@ body {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--dark-color);
   text-decoration: none;
 }
 
@@ -161,6 +161,11 @@ img {
   text-align: center;
 }
 
+.placeitem:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.3);
+}
+
 .weatheritem {
   border: whitesmoke 1px;
   border-bottom-style: dotted;
@@ -242,7 +247,7 @@ img {
 
 .placeslist {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
 }
 
