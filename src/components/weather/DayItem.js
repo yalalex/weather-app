@@ -20,9 +20,7 @@ const DayItem = ({ day, lang }) => {
         <h2>
           {max_temp.toFixed()}°/{min_temp.toFixed()}°
         </h2>
-      </div>
-      {window.innerWidth > 640 ? (
-        <div>
+        {window.innerWidth > 640 && (
           <ul>
             <li>
               {lang === 'en' ? 'Precipitation: ' : 'Осадки: '}
@@ -41,8 +39,9 @@ const DayItem = ({ day, lang }) => {
               {pres.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
             </li>
           </ul>
-        </div>
-      ) : (
+        )}
+      </div>
+      {window.innerWidth < 640 && (
         <div className='flex'>
           <div>
             <ul>
