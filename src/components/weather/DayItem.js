@@ -8,14 +8,14 @@ const DayItem = ({ day, lang }) => {
     <Fragment>
       <div className='weatheritem'>
         <h3>
-          <Moment locale={lang} unix format='ddd Do'>
+          <Moment locale={lang} unix format='dd Do'>
             {ts}
           </Moment>
         </h3>
         <img
           alt={weather.description}
           src={`https://www.weatherbit.io/static/img/icons/${weather.icon}.png`}
-          style={{ width: '70px' }}
+          style={{ width: '66px' }}
         />
         <h2>
           {max_temp.toFixed()}°/{min_temp.toFixed()}°
@@ -28,17 +28,17 @@ const DayItem = ({ day, lang }) => {
                 {pop}%
               </li>
               <li>
-                <i className='fas fa-wind' />
-                {wind_spd.toFixed(1)}
-                {lang === 'en' ? 'm/s' : 'м/с'}
+                <i className='fas fa-water' />
+                {rh}%
               </li>
             </ul>
           </div>
           <div>
             <ul>
               <li>
-                <i className='fas fa-water' />
-                {rh}%
+                <i className='fas fa-wind' />
+                {wind_spd.toFixed(1)}
+                {lang === 'en' ? 'm/s' : 'м/с'}
               </li>
               <li>
                 <i className='fas fa-square' />

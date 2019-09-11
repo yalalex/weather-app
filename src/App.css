@@ -143,6 +143,17 @@ img {
   background: rgba(0, 0, 0, 0.1);
 }
 
+.day {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.placeslist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
 .listitems {
   display: flex;
   flex-flow: wrap;
@@ -156,7 +167,7 @@ img {
 
 .placeitem {
   padding: 1rem;
-  margin: 0.7rem 0;
+  margin: 0;
   background: rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -173,10 +184,10 @@ img {
   width: 170px;
 }
 
-.flex {
+/* .flex {
   margin: 1rem;
   width: 170px;
-}
+} */
 
 /* List */
 .list {
@@ -240,17 +251,6 @@ img {
 }
 
 /* Grid */
-.day {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.placeslist {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
-}
-
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -515,6 +515,11 @@ table th {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .day {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
   .listitems {
     display: flex;
     flex-direction: column;
@@ -544,7 +549,7 @@ table th {
     align-items: center;
   }
 
-  .flex {
+  /* .flex {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -553,8 +558,8 @@ table th {
     width: 100%;
     margin: auto;
     text-align: center;
-    /* align-items: center; */
-  }
+    align-items: center;
+  } */
 
   .placeitem {
     display: flex;

@@ -50,7 +50,7 @@ const Search = ({ history }) => {
         />
       </form>
       {places.length > 0 && window.location.pathname === '/weather-app' && (
-        <button className='btn btn-grey btn-block my' onClick={clearSearch}>
+        <button className='btn btn-grey btn-block my-1' onClick={clearSearch}>
           {lang === 'en' ? 'Clear' : 'Очистить'}
         </button>
       )}
