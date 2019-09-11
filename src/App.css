@@ -479,11 +479,6 @@ table th {
     margin: 0.5rem 0;
   }
 
-  .navbar {
-    line-height: 1.6;
-    margin-bottom: 0.7rem;
-  }
-
   .container {
     padding: 0 0.7rem;
   }
@@ -560,6 +555,8 @@ table th {
 
   /* Navbar */
   .navbar {
+    line-height: 1.6;
+    margin-bottom: 0.7rem;
     display: block;
     text-align: center;
   }
