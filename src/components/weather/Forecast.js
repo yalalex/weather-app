@@ -107,14 +107,17 @@ const Forecast = () => {
                   <h3>{lang === 'en' ? weather : 'Текущие условия:'}</h3>
                 </li>
                 <li>
+                  <i className='fas fa-water' />{' '}
                   {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
                   {humidity}%
                 </li>
                 <li>
+                  <i className='fas fa-wind' />{' '}
                   {lang === 'en' ? 'Wind: ' : 'Ветер: '}
                   {wind.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
                 </li>
                 <li>
+                  <i className='fas fa-square' />{' '}
                   {lang === 'en' ? 'Pressure: ' : 'Давление: '}
                   {pressure.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
                 </li>

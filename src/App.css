@@ -235,6 +235,11 @@ img {
 }
 
 /* Grid */
+.day {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .placeslist {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -555,10 +560,6 @@ table th {
     width: 100%;
     margin: auto;
     align-items: center;
-  }
-
-  .day {
-    grid-template-columns: 1fr;
   }
 
   /* Text Styles */

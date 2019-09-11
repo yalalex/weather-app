@@ -20,37 +20,15 @@ const DayItem = ({ day, lang }) => {
         <h2>
           {max_temp.toFixed()}°/{min_temp.toFixed()}°
         </h2>
-        {window.innerWidth > 640 && (
-          <ul>
-            <li>
-              {lang === 'en' ? 'Precipitation: ' : 'Осадки: '}
-              {pop}%
-            </li>
-            <li>
-              {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
-              {rh}%
-            </li>
-            <li>
-              {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-              {wind_spd.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
-            </li>
-            <li>
-              {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-              {pres.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
-            </li>
-          </ul>
-        )}
-      </div>
-      {window.innerWidth < 640 && (
-        <div className='flex'>
+        <div className='day'>
           <div>
             <ul>
               <li>
-                {lang === 'en' ? 'Precipitation: ' : 'Осадки: '}
+                <i className='fas fa-umbrella' />
                 {pop}%
               </li>
               <li>
-                {lang === 'en' ? 'Humidity: ' : 'Влажность: '}
+                <i className='fas fa-water' />
                 {rh}%
               </li>
             </ul>
@@ -58,17 +36,19 @@ const DayItem = ({ day, lang }) => {
           <div>
             <ul>
               <li>
-                {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-                {wind_spd.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
+                <i className='fas fa-wind' />
+                {wind_spd.toFixed(1)}
+                {lang === 'en' ? 'm/s' : 'м/с'}
               </li>
               <li>
-                {lang === 'en' ? 'Pressure: ' : 'Давление: '}
-                {pres.toFixed()} {lang === 'en' ? 'mbar' : 'мбар'}
+                <i className='fas fa-square' />
+                {pres.toFixed()}
+                {lang === 'en' ? 'mb' : 'мб'}
               </li>
             </ul>
           </div>
         </div>
-      )}
+      </div>
     </Fragment>
   );
 };
