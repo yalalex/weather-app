@@ -12,7 +12,7 @@ const About = () => {
       </p>
       <p>
         Provides information on current weather, as well as a detailed forecast
-        for the next 48 hours and a forecast for 16 days.
+        for the next 48 hours and a forecast for 15 days.
       </p>
       <p>
         Made by <a href='https://github.com/yalalex/'>Alex Y</a>.
@@ -24,7 +24,7 @@ const About = () => {
       <p>Приложение для поиска погоды в более чем 134 000 городах мира.</p>
       <p>
         Предоставляет информацию по текущей погоде, а так же подробный прогноз
-        на ближайшие 48 часов и прогноз на 16 дней.
+        на ближайшие 48 часов и прогноз на 15 дней.
       </p>
       <p>
         Сделал <a href='https://github.com/yalalex/'>Alex Y</a>.

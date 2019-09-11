@@ -46,7 +46,7 @@ export default (state, action) => {
     case GET_FORECAST:
       return {
         ...state,
-        forecast16: action.payload,
+        forecast15: action.payload,
         loading: false
       };
     case SWITCH_LANG:

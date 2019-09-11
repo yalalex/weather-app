@@ -6,7 +6,7 @@ const PeriodItem = ({ period, offset, lang }) => {
   const { dt, main, weather } = period,
     time = dt + offset;
   return (
-    <div className='perioditem'>
+    <div className='weatheritem'>
       <h3>
         <Moment locale={lang} unix format='ddd LT'>
           {time}

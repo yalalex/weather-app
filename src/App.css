@@ -143,7 +143,7 @@ img {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.flex {
+.listitems {
   display: flex;
   flex-flow: wrap;
   flex-direction: row;
@@ -154,11 +154,18 @@ img {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.perioditem {
+.placeitem {
+  padding: 1rem;
+  margin: 0.7rem 0;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.weatheritem {
   border: whitesmoke 1px;
   border-bottom-style: dotted;
   margin: 1rem;
-  width: 135px;
+  width: 170px;
 }
 
 /* List */
@@ -223,6 +230,12 @@ img {
 }
 
 /* Grid */
+.placeslist {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -452,21 +465,27 @@ table th {
 }
 
 /* Mobile Styles */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .hide-sm {
     display: none;
   }
 
+  body {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  input {
+    margin: 0.5rem 0;
+  }
+
   .container {
-    max-width: 1080px;
-    margin: auto;
-    overflow: hidden;
     padding: 0 0.7rem;
   }
 
   .card {
-    padding: 1rem;
-    margin: 0.7rem 0;
+    padding: 0.7rem;
+    margin: 0.4rem 0;
     text-align: center;
   }
 
@@ -481,7 +500,7 @@ table th {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .flex {
+  .listitems {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -490,7 +509,27 @@ table th {
     background: rgba(0, 0, 0, 0.1);
   }
 
-  .perioditem {
+  .placeslist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .weatheritem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: whitesmoke 1px;
+    border-bottom-style: dotted;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+  }
+
+  .placeitem {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

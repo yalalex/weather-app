@@ -27,7 +27,7 @@ const WeatherState = props => {
     place: null,
     current: {},
     forecastToday: [],
-    forecast16: []
+    forecast15: []
   };
 
   const [state, dispatch] = useReducer(WeatherReducer, initialState);
@@ -71,7 +71,7 @@ const WeatherState = props => {
     dispatch({ type: SELECT_PLACE, payload: place });
   };
 
-  //Get current weather and 30-hr/16-day forecast
+  //Get current weather and 30-hr/15-day forecast
   const getWeather = async () => {
     setLoading();
     const { units } = state,
@@ -102,7 +102,7 @@ const WeatherState = props => {
     const resp = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
-    const today = resp.data.list.slice(0, 16);
+    const today = resp.data.list.slice(0, 15);
     today.map(async period => {
       //Change icons according to local time
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
@@ -116,12 +116,13 @@ const WeatherState = props => {
       }
     });
     dispatch({ type: GET_TODAY_WEATHER, payload: today });
-    //Get forecast for 16 days
+    //Get forecast for 15 days
     const un = units === 'metric' ? 'M' : 'I';
     const res = await axios.get(
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${process.env.REACT_APP_WEATHERBIT_KEY}`
     );
-    dispatch({ type: GET_FORECAST, payload: res.data.data });
+    const forecast15 = res.data.data.slice(0, 15);
+    dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
 
   //Switch language
@@ -155,7 +156,7 @@ const WeatherState = props => {
         place: state.place,
         current: state.current,
         forecastToday: state.forecastToday,
-        forecast16: state.forecast16,
+        forecast15: state.forecast15,
         searchPlaces,
         clearSearch,
         setAlert,

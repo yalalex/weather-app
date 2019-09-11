@@ -30,18 +30,19 @@ const PlaceItem = ({ place }) => {
 
   const { city, regionCode, country } = place;
   return (
-    <div className='card text-center'>
+    <div className='placeitem'>
       <h1>{temp}°</h1>
+
       <img
         alt={sky}
         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         style={{ width: '100px' }}
       />
-      <h3>
-        {city}, {regionCode}
-      </h3>
-      <h4>{country}</h4>
-      <div>
+      <div className='all-center'>
+        <h3>
+          {city}, {regionCode}
+        </h3>
+        {window.innerWidth > 640 && <h4>{country}</h4>}
         <Link
           to={`/weather-app/current/${city}`}
           className='btn btn-dark btn-sm my-1'
@@ -50,15 +51,40 @@ const PlaceItem = ({ place }) => {
           {lang === 'en' ? 'Select' : 'Выбрать'}
         </Link>
       </div>
+      {/* <div>
+        
+      </div> */}
     </div>
   );
 };
 
+// const { city, regionCode, country } = place;
+// return (
+//   <Link
+//     to={`/weather-app/current/${city}`}
+//     // className='btn btn-dark btn-sm my-1'
+//     onClick={() => selectPlace(place)}
+//   >
+//     <div className='placeitem'>
+//       <h1>{temp}°</h1>
+//       <img
+//         alt={sky}
+//         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+//         style={{ width: '100px' }}
+//       />
+//       <div className='all-center'>
+//         <h3>
+//           {city}, {regionCode}
+//         </h3>
+//       </div>
+//       {window.innerWidth > 640 && <h4>{country}</h4>}
+//     </div>
+//   </Link>
+// );
+// };
+
 PlaceItem.propTypes = {
-  place: PropTypes.object.isRequired,
-  selectPlace: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
-  units: PropTypes.string.isRequired
+  place: PropTypes.object.isRequired
 };
 
 export default PlaceItem;

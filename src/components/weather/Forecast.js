@@ -12,7 +12,7 @@ const Forecast = () => {
   const {
     current,
     forecastToday,
-    forecast16,
+    forecast15,
     getWeather,
     loading,
     units,
@@ -24,11 +24,11 @@ const Forecast = () => {
 
   useEffect(() => {
     if (lang === 'en') {
-      setBtn('16-day forecast');
-      setTarget('16-day');
+      setBtn('15-day forecast');
+      setTarget('15-day');
     } else {
-      setBtn('Прогноз на 16 дней');
-      setTarget('16-day');
+      setBtn('Прогноз на 15 дней');
+      setTarget('15-day');
     }
     //eslint-disable-next-line
   }, []);
@@ -44,18 +44,18 @@ const Forecast = () => {
   }, [units]);
 
   const switchTarget = target => {
-    if (target === '16-day') {
+    if (target === '15-day') {
       setTarget('current');
     } else {
-      setTarget('16-day');
+      setTarget('15-day');
     }
   };
 
   const switchButton = () => {
-    target === '16-day'
+    target === '15-day'
       ? lang === 'en'
-        ? setBtn('16-day forecast')
-        : setBtn('Прогноз на 16 дней')
+        ? setBtn('15-day forecast')
+        : setBtn('Прогноз на 15 дней')
       : lang === 'en'
       ? setBtn('48-hr forecast')
       : setBtn('Прогноз на 48 часов');
@@ -133,7 +133,7 @@ const Forecast = () => {
               exact
               path='/weather-app/current/:name'
               render={props => (
-                <div className='flex'>
+                <div className='listitems'>
                   {forecastToday.map(period => (
                     <PeriodItem
                       key={period.dt}
@@ -147,10 +147,10 @@ const Forecast = () => {
             />
             <Route
               exact
-              path='/weather-app/16-day/:name'
+              path='/weather-app/15-day/:name'
               render={props => (
-                <div className='grid-4'>
-                  {forecast16.map(day => (
+                <div className='listitems'>
+                  {forecast15.map(day => (
                     <DayItem key={day.ts} day={day} lang={lang} />
                   ))}
                 </div>
