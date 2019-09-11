@@ -168,6 +168,11 @@ img {
   width: 170px;
 }
 
+.flex {
+  margin: 1rem;
+  width: 170px;
+}
+
 /* List */
 .list {
   margin: 0.5rem 0;
@@ -529,6 +534,18 @@ table th {
     align-items: center;
   }
 
+  .flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: whitesmoke 1px;
+    border-bottom-style: dotted;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    /* align-items: center; */
+  }
+
   .placeitem {
     display: flex;
     flex-direction: row;
@@ -538,6 +555,10 @@ table th {
     width: 100%;
     margin: auto;
     align-items: center;
+  }
+
+  .day {
+    grid-template-columns: 1fr;
   }
 
   /* Text Styles */
