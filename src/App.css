@@ -48,13 +48,17 @@ img {
   cursor: pointer;
 }
 
+.switch:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .switch .select {
   padding-left: 10px;
 }
 
-.switch .select:hover {
+/* .switch .select:hover {
   background: rgba(0, 0, 0, 0.2);
-}
+} */
 
 .switch .select i {
   margin-left: 5px;
@@ -66,10 +70,11 @@ img {
   display: none;
   width: 100%;
   text-align: center;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .switch .select-drop:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .switch:hover .select-drop {
