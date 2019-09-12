@@ -139,19 +139,13 @@ img {
 /* Cards */
 .card {
   padding: 1rem;
-  margin: 0.7rem 0;
+  margin: 0.5rem 0;
   background: rgba(0, 0, 0, 0.1);
 }
 
 .day {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-}
-
-.placeslist {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
 }
 
 .listitems {
@@ -166,16 +160,10 @@ img {
 }
 
 .placeitem {
-  padding: 1rem;
-  margin: 0;
   background: rgba(0, 0, 0, 0.1);
-  text-align: center;
-  height: 260px;
-}
-
-.placeitem:hover {
-  color: #333;
-  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 238px;
 }
 
 .weatheritem {
@@ -185,10 +173,11 @@ img {
   width: 187px;
 }
 
-/* .flex {
-  margin: 1rem;
-  width: 170px;
-} */
+.placeitem:hover,
+.weatheritem:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.3);
+}
 
 /* List */
 .list {
@@ -492,16 +481,16 @@ table th {
   }
 
   input {
-    margin: 1rem 0;
+    margin: 0.8rem 0;
   }
 
   .container {
-    padding: 0 0.7rem;
+    padding: 0 0.5rem;
   }
 
   .card {
-    padding: 0.7rem;
-    margin: 0.4rem 0;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
     text-align: center;
   }
 
@@ -530,38 +519,7 @@ table th {
     background: rgba(0, 0, 0, 0.1);
   }
 
-  .placeslist {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .weatheritem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border: whitesmoke 1px;
-    border-bottom-style: dotted;
-    width: 100%;
-    margin: auto;
-    align-items: center;
-  }
-
-  /* .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border: whitesmoke 1px;
-    border-bottom-style: dotted;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-  } */
-
+  .weatheritem,
   .placeitem {
     display: flex;
     flex-direction: row;
@@ -571,6 +529,7 @@ table th {
     width: 100%;
     margin: auto;
     align-items: center;
+    height: 110px;
   }
 
   /* Text Styles */

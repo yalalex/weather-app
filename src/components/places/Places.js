@@ -11,7 +11,7 @@ const Places = () => {
     return <Spinner />;
   } else
     return (
-      <div className='placeslist'>
+      <div className='listitems'>
         {places.map(place => (
           <PlaceItem key={place.id} place={place} />
         ))}
