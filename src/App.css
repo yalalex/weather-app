@@ -52,19 +52,24 @@ img {
   padding-left: 10px;
 }
 
+.switch .select:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .switch .select i {
   margin-left: 5px;
 }
 
 .switch .select-drop {
   position: absolute;
-  top: 18px;
-  left: 25px;
+  top: 1.3rem;
   display: none;
+  width: 100%;
+  text-align: center;
 }
 
-.switch .select-drop li {
-  list-style-type: none;
+.switch .select-drop:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .switch:hover .select-drop {
@@ -425,7 +430,7 @@ table th {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0.8rem 2rem;
   z-index: 1;
   width: 100%;
   opacity: 0.9;
