@@ -66,11 +66,11 @@ img {
 
 .switch .select-drop {
   position: absolute;
-  top: 1.4rem;
+  top: 1.6rem;
   display: none;
   width: 100%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .switch .select-drop:hover {
