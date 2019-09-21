@@ -115,6 +115,17 @@ const Forecast = () => {
                   <i className='fas fa-wind' />{' '}
                   {lang === 'en' ? 'Wind: ' : 'Ветер: '}
                   {wind.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
+                  {/* {lang === 'en' ? 'Wind: ' : 'Ветер: '}
+                  {units === 'metric'
+                    ? wind.toFixed(1)
+                    : (wind * 2, 23693).toFixed(1)}{' '}
+                  {lang === 'en'
+                    ? units === 'metric'
+                      ? 'm/s'
+                      : 'mph'
+                    : units === 'metric'
+                    ? 'м/c'
+                    : 'м/ч'} */}
                 </li>
                 <li>
                   <i className='fas fa-square' />{' '}
