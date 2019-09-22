@@ -94,10 +94,8 @@ const Forecast = () => {
               <div style={{ margin: 'auto 0' }}>
                 <h1>{temp}°</h1>
                 <h3>
-                  {forecast15[0].max_temp.toFixed()}°
-                  <i className='fas fa-angle-up' />/
+                  {forecast15[0].max_temp.toFixed()}°/
                   {forecast15[0].min_temp.toFixed()}°
-                  <i className='fas fa-angle-down' />
                 </h3>
                 <h2>{name}</h2>
                 <h3>
