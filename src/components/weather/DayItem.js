@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const DayItem = ({ day, lang }) => {
+const DayItem = ({ day, lang, units }) => {
   const { ts, max_temp, min_temp, wind_spd, pop, pres, rh, weather } = day;
   return (
     <Fragment>
@@ -38,7 +38,13 @@ const DayItem = ({ day, lang }) => {
               <li>
                 <i className='fas fa-wind' />
                 {wind_spd.toFixed(1)}
-                {lang === 'en' ? 'm/s' : 'м/с'}
+                {lang === 'en'
+                  ? units === 'metric'
+                    ? 'm/s'
+                    : 'mph'
+                  : units === 'metric'
+                  ? 'м/c'
+                  : 'м/ч'}
               </li>
               <li>
                 <i className='fas fa-square' />

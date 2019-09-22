@@ -75,7 +75,7 @@ const Forecast = () => {
     } = current,
     offset = new Date().getTimezoneOffset() * 60 + timezone,
     time = dt + offset;
-  if (forecastToday.length === 0) return null;
+  if (forecast15.length === 0) return null;
   else if (loading) {
     return <Spinner />;
   } else
@@ -93,6 +93,12 @@ const Forecast = () => {
               </div>
               <div style={{ margin: 'auto 0' }}>
                 <h1>{temp}°</h1>
+                <h3>
+                  {forecast15[0].max_temp.toFixed()}°
+                  <i className='fas fa-angle-up' />/
+                  {forecast15[0].min_temp.toFixed()}°
+                  <i className='fas fa-angle-down' />
+                </h3>
                 <h2>{name}</h2>
                 <h3>
                   <Moment locale={lang} unix format='LT'>
@@ -114,18 +120,14 @@ const Forecast = () => {
                 <li>
                   <i className='fas fa-wind' />{' '}
                   {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-                  {wind.toFixed(1)} {lang === 'en' ? 'm/s' : 'м/с'}
-                  {/* {lang === 'en' ? 'Wind: ' : 'Ветер: '}
-                  {units === 'metric'
-                    ? wind.toFixed(1)
-                    : (wind * 2, 23693).toFixed(1)}{' '}
+                  {wind.toFixed(1)}{' '}
                   {lang === 'en'
                     ? units === 'metric'
                       ? 'm/s'
                       : 'mph'
                     : units === 'metric'
                     ? 'м/c'
-                    : 'м/ч'} */}
+                    : 'м/ч'}
                 </li>
                 <li>
                   <i className='fas fa-square' />{' '}
@@ -165,7 +167,7 @@ const Forecast = () => {
               render={props => (
                 <div className='listitems'>
                   {forecast15.map(day => (
-                    <DayItem key={day.ts} day={day} lang={lang} />
+                    <DayItem key={day.ts} day={day} lang={lang} units={units} />
                   ))}
                 </div>
               )}
