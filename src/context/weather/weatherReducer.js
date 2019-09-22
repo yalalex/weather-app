@@ -34,14 +34,14 @@ export default (state, action) => {
     case GET_CURRENT_WEATHER:
       return {
         ...state,
-        current: action.payload,
-        loading: false
+        current: action.payload
+        // loading: false
       };
     case GET_TODAY_WEATHER:
       return {
         ...state,
-        forecastToday: action.payload,
-        loading: false
+        forecastToday: action.payload
+        // loading: false
       };
     case GET_FORECAST:
       return {
