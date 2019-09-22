@@ -98,11 +98,11 @@ const Forecast = () => {
                   {forecast15[0].min_temp.toFixed()}°
                 </h3>
                 <h2>{name}</h2>
-                <h3>
+                <h4>
                   <Moment locale={lang} unix format='LT'>
                     {time}
                   </Moment>
-                </h3>
+                </h4>
               </div>
             </div>
             <div style={{ margin: 'auto 0' }}>
