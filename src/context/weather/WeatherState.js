@@ -121,7 +121,7 @@ const WeatherState = props => {
     const res = await axios.get(
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${process.env.REACT_APP_WEATHERBIT_KEY}`
     );
-    const forecast15 = res.data.data.slice(0, 15);
+    const forecast15 = res.data.data.slice(1, 16);
     dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
 
