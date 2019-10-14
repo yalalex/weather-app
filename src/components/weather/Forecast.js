@@ -92,7 +92,7 @@ const Forecast = () => {
                 />
               </div>
               <div style={{ margin: 'auto 0' }}>
-                <h1>{temp}°</h1>
+                <h1>{temp.toFixed()}°</h1>
                 <h3>
                   {forecast15[0].max_temp.toFixed()}°/
                   {forecast15[0].min_temp.toFixed()}°
