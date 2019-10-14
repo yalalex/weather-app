@@ -71,6 +71,13 @@ const WeatherState = props => {
     dispatch({ type: SELECT_PLACE, payload: place });
   };
 
+  const fixZero = temp => {
+    if (temp.toFixed() === '-0') {
+      temp = 0;
+    }
+    return temp;
+  };
+
   //Get current weather and 30-hr/15-day forecast
   const getWeather = async () => {
     setLoading();
@@ -87,7 +94,7 @@ const WeatherState = props => {
       name: city,
       timezone,
       dt,
-      temp: temp.toFixed(),
+      temp: temp,
       wind: wind.speed,
       pressure,
       humidity,
@@ -97,6 +104,7 @@ const WeatherState = props => {
       sunrise,
       sunset
     };
+    current.temp = fixZero(current.temp);
     dispatch({ type: GET_CURRENT_WEATHER, payload: current });
     //Get forecast for 30 hours
     const resp = await axios.get(
@@ -104,6 +112,7 @@ const WeatherState = props => {
     );
     const today = resp.data.list.slice(0, 15);
     today.map(async period => {
+      period.main.temp = fixZero(period.main.temp);
       //Change icons according to local time
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
@@ -122,6 +131,10 @@ const WeatherState = props => {
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${process.env.REACT_APP_WEATHERBIT_KEY}`
     );
     const forecast15 = res.data.data.slice(1, 16);
+    forecast15.map(async day => {
+      day.max_temp = fixZero(day.max_temp);
+      day.min_temp = fixZero(day.min_temp);
+    });
     dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
 
