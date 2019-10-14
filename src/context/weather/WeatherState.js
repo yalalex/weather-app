@@ -176,7 +176,8 @@ const WeatherState = props => {
         selectPlace,
         getWeather,
         switchUnits,
-        switchLang
+        switchLang,
+        fixZero
       }}
     >
       {props.children}

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const PlaceItem = ({ place }) => {
   const weatherContext = useContext(WeatherContext);
-  const { units, selectPlace } = weatherContext;
+  const { units, selectPlace, fixZero } = weatherContext;
 
   const [temp, setTemp] = useState('');
   const [sky, setSky] = useState('');
@@ -23,10 +23,7 @@ const PlaceItem = ({ place }) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
     const { main, weather } = res.data;
-    if (main.temp.toFixed() === '-0') {
-      main.temp = 0;
-    }
-    console.log(main.temp);
+    main.temp = fixZero(main.temp);
     setTemp(main.temp.toFixed());
     setSky(weather[0].description);
     setIcon(weather[0].icon);
