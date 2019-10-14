@@ -61,7 +61,8 @@ export default (state, action) => {
     case SET_ALERT:
       return {
         ...state,
-        alert: action.payload
+        alert: action.payload,
+        loading: false
       };
     case REMOVE_ALERT:
       return {
