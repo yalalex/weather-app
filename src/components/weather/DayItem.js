@@ -20,7 +20,7 @@ const DayItem = ({ day, lang, units }) => {
         <h2>
           {max_temp.toFixed()}°/{min_temp.toFixed()}°
         </h2>
-        <div className='day'>
+        <div className='conditions'>
           <div>
             <ul>
               <li>

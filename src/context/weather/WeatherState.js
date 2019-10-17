@@ -71,6 +71,7 @@ const WeatherState = props => {
     dispatch({ type: SELECT_PLACE, payload: place });
   };
 
+  //Negative zero temperature fix
   const fixZero = temp => {
     if (temp.toFixed() === '-0') {
       temp = 0;
