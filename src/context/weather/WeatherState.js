@@ -79,7 +79,7 @@ const WeatherState = props => {
     return temp;
   };
 
-  //Get current weather and 30-hr/15-day forecast
+  //Get current weather and 48-hr/15-day forecast
   const getWeather = async () => {
     setLoading();
     const { units } = state,
@@ -107,7 +107,7 @@ const WeatherState = props => {
     };
     current.temp = fixZero(current.temp);
     dispatch({ type: GET_CURRENT_WEATHER, payload: current });
-    //Get forecast for 30 hours
+    //Get forecast for 48 hours
     const resp = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
