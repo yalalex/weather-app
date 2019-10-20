@@ -32,6 +32,12 @@ const WeatherState = props => {
 
   const [state, dispatch] = useReducer(WeatherReducer, initialState);
 
+  //Set alert
+  const setAlert = (msg, type) => {
+    dispatch({ type: SET_ALERT, payload: { msg, type } });
+    setTimeout(() => dispatch({ type: REMOVE_ALERT }), 3000);
+  };
+
   //Search places to get weather for
   const searchPlaces = async text => {
     setLoading();
@@ -60,23 +66,9 @@ const WeatherState = props => {
       });
   };
 
-  //Set alert
-  const setAlert = (msg, type) => {
-    dispatch({ type: SET_ALERT, payload: { msg, type } });
-    setTimeout(() => dispatch({ type: REMOVE_ALERT }), 3000);
-  };
-
   //Select place in search and get weather for it
   const selectPlace = async place => {
     dispatch({ type: SELECT_PLACE, payload: place });
-  };
-
-  //Negative zero temperature fix
-  const fixZero = temp => {
-    if (temp.toFixed() === '-0') {
-      temp = 0;
-    }
-    return temp;
   };
 
   //Get current weather and 48-hr/15-day forecast
@@ -137,6 +129,14 @@ const WeatherState = props => {
       day.min_temp = fixZero(day.min_temp);
     });
     dispatch({ type: GET_FORECAST, payload: forecast15 });
+  };
+
+  //Negative zero temperature fix
+  const fixZero = temp => {
+    if (temp.toFixed() === '-0') {
+      temp = 0;
+    }
+    return temp;
   };
 
   //Switch language
