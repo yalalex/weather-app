@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import WeatherContext from '../../context/weather/weatherContext';
 
-const Search = ({ history }) => {
+const Search = ({ history, location }) => {
   const weatherContext = useContext(WeatherContext);
 
   const { searchPlaces, clearSearch, setAlert, lang, places } = weatherContext;
@@ -49,7 +49,7 @@ const Search = ({ history }) => {
           className='btn btn-dark btn-block'
         />
       </form>
-      {places.length > 0 && window.location.pathname === '/weather-app' && (
+      {places.length > 0 && location.pathname === '/weather-app' && (
         <button className='btn btn-grey btn-block my-1' onClick={clearSearch}>
           {lang === 'en' ? 'Clear' : 'Очистить'}
         </button>
