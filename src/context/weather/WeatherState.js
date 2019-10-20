@@ -114,7 +114,7 @@ const WeatherState = props => {
     const today = resp.data.list.slice(0, 15);
     today.map(async period => {
       period.main.temp = fixZero(period.main.temp);
-      //Change icons according to local time
+      //Change icons according to local time in requested place
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
       } else if (sunset < period.dt && period.dt < sunrise + 86400) {
