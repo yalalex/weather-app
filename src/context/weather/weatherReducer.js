@@ -34,13 +34,11 @@ export default (state, action) => {
       return {
         ...state,
         current: action.payload
-        // loading: false
       };
     case GET_TODAY_WEATHER:
       return {
         ...state,
         forecastToday: action.payload
-        // loading: false
       };
     case GET_FORECAST:
       return {
@@ -61,8 +59,7 @@ export default (state, action) => {
     case SET_ALERT:
       return {
         ...state,
-        alert: action.payload,
-        loading: false
+        alert: action.payload
       };
     case REMOVE_ALERT:
       return {
