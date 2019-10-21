@@ -137,18 +137,10 @@ const WeatherState = props => {
   };
 
   //Switch language
-  const switchLang = () => {
-    state.lang === 'en'
-      ? dispatch({ type: SWITCH_LANG, payload: 'ru' })
-      : dispatch({ type: SWITCH_LANG, payload: 'en' });
-  };
+  const switchLang = lang => dispatch({ type: SWITCH_LANG, payload: lang });
 
   // Switch units
-  const switchUnits = () => {
-    state.units === 'metric'
-      ? dispatch({ type: SWITCH_UNITS, payload: 'imperial' })
-      : dispatch({ type: SWITCH_UNITS, payload: 'metric' });
-  };
+  const switchUnits = units => dispatch({ type: SWITCH_UNITS, payload: units });
 
   //Clear search
   const clearSearch = () => dispatch({ type: CLEAR_SEARCH });

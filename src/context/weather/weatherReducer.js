@@ -51,12 +51,12 @@ export default (state, action) => {
     case SWITCH_LANG:
       return {
         ...state,
-        lang: action.payload
+        lang: action.payload === 'en' ? 'ru' : 'en'
       };
     case SWITCH_UNITS:
       return {
         ...state,
-        units: action.payload
+        units: action.payload === 'metric' ? 'imperial' : 'metric'
       };
     case SET_ALERT:
       return {
