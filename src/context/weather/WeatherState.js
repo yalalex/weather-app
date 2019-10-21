@@ -133,7 +133,7 @@ const WeatherState = props => {
 
   //Negative zero temperature fix
   const fixZero = temp => {
-    return temp.toFixed() === '-0' ? (temp = 0) : temp;
+    return (temp = temp.toFixed() === '-0' ? 0 : temp);
   };
 
   //Switch language
