@@ -187,6 +187,7 @@ img {
 .weatheritem:hover {
   color: #333;
   background: rgba(0, 0, 0, 0.3);
+  cursor: default;
 }
 
 /* List */

@@ -130,11 +130,6 @@ const WeatherState = props => {
     dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
 
-  //Negative zero temperature fix
-  // const fixZero = temp => {
-  //   return (temp = temp.toFixed() === '-0' ? 0 : temp);
-  // };
-
   //Switch language
   const switchLang = lang => dispatch({ type: SWITCH_LANG, payload: lang });
 
