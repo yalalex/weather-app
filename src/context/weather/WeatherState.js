@@ -60,9 +60,6 @@ const WeatherState = props => {
         } else {
           dispatch({ type: SEARCH_PLACES, payload: res.body.data });
         }
-      })
-      .catch(err => {
-        console.log(err);
       });
   };
 
@@ -86,7 +83,7 @@ const WeatherState = props => {
       name: city,
       timezone,
       dt,
-      temp: temp,
+      temp,
       wind: wind.speed,
       pressure,
       humidity,

@@ -179,7 +179,11 @@ img {
   width: 187px;
 }
 
-.placeitem:hover,
+.placeitem:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.3);
+}
+
 .weatheritem:hover {
   color: #333;
   background: rgba(0, 0, 0, 0.3);
