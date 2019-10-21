@@ -2,7 +2,7 @@
   "name": "weather",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yalalex.github.io/weather-app-redux",
+  "homepage": "https://yalalex.github.io/weather-app",
   "dependencies": {
     "axios": "^0.19.0",
     "moment": "^2.24.0",
