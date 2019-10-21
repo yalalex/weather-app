@@ -76,8 +76,7 @@ const Forecast = () => {
     } = current,
     offset = new Date().getTimezoneOffset() * 60 + timezone,
     time = dt + offset;
-  if (forecast15.length === 0) return null;
-  else if (loading) {
+  if (loading || forecast15.length === 0) {
     return <Spinner />;
   } else
     return (
