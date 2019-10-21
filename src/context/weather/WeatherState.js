@@ -72,10 +72,9 @@ const WeatherState = props => {
   };
 
   //Get current weather and 48-hr/15-day forecast
-  const getWeather = async () => {
+  const getWeather = async (place, units) => {
     setLoading();
-    const { units } = state,
-      { city, latitude, longitude } = state.place;
+    const { city, latitude, longitude } = place;
     //Get current weather
     const respo = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
@@ -97,7 +96,7 @@ const WeatherState = props => {
       sunrise,
       sunset
     };
-    current.temp = fixZero(current.temp);
+    if (current.temp.toFixed() === '-0') current.temp = 0;
     dispatch({ type: GET_CURRENT_WEATHER, payload: current });
     //Get forecast for 48 hours
     const resp = await axios.get(
@@ -105,7 +104,7 @@ const WeatherState = props => {
     );
     const today = resp.data.list.slice(0, 15);
     today.map(async period => {
-      period.main.temp = fixZero(period.main.temp);
+      if (period.main.temp.toFixed() === '-0') period.main.temp = 0;
       //Change icons according to local time in requested place
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'd';
@@ -125,16 +124,16 @@ const WeatherState = props => {
     );
     const forecast15 = res.data.data.slice(1, 16);
     forecast15.map(async day => {
-      day.max_temp = fixZero(day.max_temp);
-      day.min_temp = fixZero(day.min_temp);
+      if (day.max_temp.toFixed() === '-0') day.max_temp = 0;
+      if (day.min_temp.toFixed() === '-0') day.min_temp = 0;
     });
     dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
 
   //Negative zero temperature fix
-  const fixZero = temp => {
-    return (temp = temp.toFixed() === '-0' ? 0 : temp);
-  };
+  // const fixZero = temp => {
+  //   return (temp = temp.toFixed() === '-0' ? 0 : temp);
+  // };
 
   //Switch language
   const switchLang = lang => dispatch({ type: SWITCH_LANG, payload: lang });
@@ -166,8 +165,7 @@ const WeatherState = props => {
         selectPlace,
         getWeather,
         switchUnits,
-        switchLang,
-        fixZero
+        switchLang
       }}
     >
       {props.children}

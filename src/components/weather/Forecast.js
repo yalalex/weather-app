@@ -14,6 +14,7 @@ const Forecast = () => {
     forecastToday,
     forecast15,
     getWeather,
+    place,
     loading,
     units,
     lang
@@ -39,7 +40,7 @@ const Forecast = () => {
   }, [lang, target]);
 
   useEffect(() => {
-    getWeather();
+    getWeather(place, units);
     //eslint-disable-next-line
   }, [units]);
 
@@ -75,7 +76,7 @@ const Forecast = () => {
     } = current,
     offset = new Date().getTimezoneOffset() * 60 + timezone,
     time = dt + offset;
-  if (forecastToday.length === 0) return null;
+  if (forecast15.length === 0) return null;
   else if (loading) {
     return <Spinner />;
   } else
