@@ -67,7 +67,7 @@ const WeatherState = props => {
   };
 
   //Select place in search and get weather for it
-  const selectPlace = async place => {
+  const selectPlace = place => {
     dispatch({ type: SELECT_PLACE, payload: place });
   };
 
