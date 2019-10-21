@@ -60,6 +60,9 @@ const WeatherState = props => {
         } else {
           dispatch({ type: SEARCH_PLACES, payload: res.body.data });
         }
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
