@@ -533,7 +533,7 @@ table th {
 
   .weatheritem,
   .placeitem {
-    padding: 1rem;
+    padding: 0.7rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
