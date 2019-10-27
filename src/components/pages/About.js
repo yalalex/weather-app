@@ -15,7 +15,7 @@ const About = () => {
         for the next 48 hours and a forecast for 15 days.
       </p>
       <p>
-        Made by <a href='https://github.com/yalalex/'>Alex Y</a>.
+        Made by <a href='https://github.com/yalalex/'>Aliaksandr Yalouskikh</a>.
       </p>
     </Fragment>
   ) : (
@@ -27,7 +27,7 @@ const About = () => {
         на ближайшие 48 часов и прогноз на 15 дней.
       </p>
       <p>
-        Сделал <a href='https://github.com/yalalex/'>Alex Y</a>.
+        Сделал <a href='https://github.com/yalalex/'>Александр Еловских</a>.
       </p>
     </Fragment>
   );
