@@ -7,7 +7,7 @@ const About = () => {
     <Fragment>
       <h2>About this app</h2>
       <p>
-        An application for finding weather in more than 134,000 cities in the
+        An application for searching weather in more than 134,000 cities in the
         world.
       </p>
       <p>
