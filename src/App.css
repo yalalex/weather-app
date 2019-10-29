@@ -19,7 +19,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  background: linear-gradient(89deg, #11998e 0%, #38ef7d 100%);
   color: #333;
 }
 
@@ -434,6 +434,7 @@ table th {
 
 /* Navbar */
 .navbar {
+  background: #3e5151;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -531,7 +532,19 @@ table th {
     background: rgba(0, 0, 0, 0.1);
   }
 
-  .weatheritem,
+  .weatheritem {
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: whitesmoke 1px;
+    border-bottom-style: dotted;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    height: 110px;
+  }
+
   .placeitem {
     padding: 0.7rem;
     display: flex;
