@@ -103,7 +103,7 @@ const WeatherState = props => {
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&APPID=${process.env.REACT_APP_OPENWEATHER_KEY}`
     );
     const today = resp.data.list.slice(0, 15);
-    today.map(async period => {
+    today.map(period => {
       if (period.main.temp.toFixed() === '-0') period.main.temp = 0;
       //Change icons according to local time in requested place
       if (sunrise + 86400 < period.dt && period.dt < sunset + 86400) {
@@ -115,6 +115,7 @@ const WeatherState = props => {
       } else if (sunset - 86400 < period.dt && period.dt < sunrise) {
         period.weather[0].icon = period.weather[0].icon.slice(0, -1) + 'n';
       }
+      return period;
     });
     dispatch({ type: GET_TODAY_WEATHER, payload: today });
     //Get forecast for 15 days
@@ -123,9 +124,10 @@ const WeatherState = props => {
       `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&units=${un}&key=${process.env.REACT_APP_WEATHERBIT_KEY}`
     );
     const forecast15 = res.data.data.slice(1, 16);
-    forecast15.map(async day => {
+    forecast15.map(day => {
       if (day.max_temp.toFixed() === '-0') day.max_temp = 0;
       if (day.min_temp.toFixed() === '-0') day.min_temp = 0;
+      return day;
     });
     dispatch({ type: GET_FORECAST, payload: forecast15 });
   };
