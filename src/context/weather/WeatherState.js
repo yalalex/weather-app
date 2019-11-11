@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import request from 'superagent';
 import axios from 'axios';
 import WeatherContext from './weatherContext';
 import WeatherReducer from './weatherReducer';
@@ -41,29 +40,27 @@ const WeatherState = props => {
   //Search places to get weather for
   const searchPlaces = async text => {
     setLoading();
-    request
-      .get('https://wft-geo-db.p.rapidapi.com/v1/geo/cities')
-      .query({ limit: '10' })
-      .query({ namePrefix: text })
-      .query({ sort: '-population' })
-      .query({ languageCode: state.lang })
-      .set('x-rapidapi-host', 'wft-geo-db.p.rapidapi.com')
-      .set('x-rapidapi-key', process.env.REACT_APP_RAPIDAPI_KEY)
-      .set('Accept', 'application/json')
-      .then(res => {
-        if (res.body.data.length === 0) {
-          const alert =
-            state.lang === 'en'
-              ? 'No cities found. Check the spelling and try again'
-              : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
-          setAlert(alert, 'dark');
-        } else {
-          dispatch({ type: SEARCH_PLACES, payload: res.body.data });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const config = {
+      headers: {
+        'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
+        'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
+      }
+    };
+    const res = await axios.get(
+      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&namePrefix=${text}&sort=-population&languageCode=${state.lang}`,
+      config
+    );
+    if (res.data.data.length === 0) {
+      const alert =
+        state.lang === 'en'
+          ? 'No cities found. Check the spelling and try again'
+          : 'Ничего не найдено. Проверьте правильность написания и попробуйте снова';
+      dispatch({ type: SET_ALERT, payload: alert });
+      setTimeout(() => dispatch({ type: REMOVE_ALERT }), 5000);
+    } else {
+      console.log(res.data);
+      dispatch({ type: SEARCH_PLACES, payload: res.data.data });
+    }
   };
 
   //Select place in search and get weather for it
