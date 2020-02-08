@@ -1,16 +1,23 @@
 {
   "files": {
-    "main.css": "/weather-app/static/css/main.5fb89279.chunk.css",
-    "main.js": "/weather-app/static/js/main.7ec25480.chunk.js",
-    "main.js.map": "/weather-app/static/js/main.7ec25480.chunk.js.map",
-    "runtime~main.js": "/weather-app/static/js/runtime~main.4606d7f5.js",
-    "runtime~main.js.map": "/weather-app/static/js/runtime~main.4606d7f5.js.map",
-    "static/js/2.acf54be4.chunk.js": "/weather-app/static/js/2.acf54be4.chunk.js",
-    "static/js/2.acf54be4.chunk.js.map": "/weather-app/static/js/2.acf54be4.chunk.js.map",
+    "main.css": "/weather-app/static/css/main.e824451d.chunk.css",
+    "main.js": "/weather-app/static/js/main.3a31800a.chunk.js",
+    "main.js.map": "/weather-app/static/js/main.3a31800a.chunk.js.map",
+    "runtime-main.js": "/weather-app/static/js/runtime-main.ff53a29c.js",
+    "runtime-main.js.map": "/weather-app/static/js/runtime-main.ff53a29c.js.map",
+    "static/js/2.7d9fc100.chunk.js": "/weather-app/static/js/2.7d9fc100.chunk.js",
+    "static/js/2.7d9fc100.chunk.js.map": "/weather-app/static/js/2.7d9fc100.chunk.js.map",
     "index.html": "/weather-app/index.html",
-    "precache-manifest.324b6db166844dd0ed8dab9356415780.js": "/weather-app/precache-manifest.324b6db166844dd0ed8dab9356415780.js",
+    "precache-manifest.11e8cd40a89ddab38c18cb03a7ab677f.js": "/weather-app/precache-manifest.11e8cd40a89ddab38c18cb03a7ab677f.js",
     "service-worker.js": "/weather-app/service-worker.js",
-    "static/css/main.5fb89279.chunk.css.map": "/weather-app/static/css/main.5fb89279.chunk.css.map",
+    "static/css/main.e824451d.chunk.css.map": "/weather-app/static/css/main.e824451d.chunk.css.map",
+    "static/js/2.7d9fc100.chunk.js.LICENSE.txt": "/weather-app/static/js/2.7d9fc100.chunk.js.LICENSE.txt",
     "static/media/spinner.gif": "/weather-app/static/media/spinner.706c7930.gif"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff53a29c.js",
+    "static/js/2.7d9fc100.chunk.js",
+    "static/css/main.e824451d.chunk.css",
+    "static/js/main.3a31800a.chunk.js"
+  ]
 }
