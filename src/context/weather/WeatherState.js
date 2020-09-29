@@ -58,7 +58,6 @@ const WeatherState = props => {
       dispatch({ type: SET_ALERT, payload: alert });
       setTimeout(() => dispatch({ type: REMOVE_ALERT }), 5000);
     } else {
-      console.log(res.data);
       dispatch({ type: SEARCH_PLACES, payload: res.data.data });
     }
   };
